@@ -12,7 +12,7 @@ export default function ({
   note = "*Gutlig nur bei Abholung",
 }: IProps) {
   return (
-    <div className="flex w-full p-4">
+    <div className="flex p-4">
       <div className="flex-col bg-white flex-3 text-center">
         <p className="text-red-500 font-semibold text-lg">{title}</p>
         <p className="text-black font-bold text-5xl">{food}</p>
