@@ -1,12 +1,12 @@
-import List from "~/components/List";
-import Header from "~/components/Header";
-import Item from "~/components/Item";
+import List from "~/components/Menu/List";
+import Header from "~/components/Menu/Header";
+import Item from "~/components/Menu/Item";
 
 import MENU from "~/data/menu.json";
 
 export default function () {
   return (
-    <div className="flex-col p-4">
+    <>
       {Object.entries(MENU).map(([title, menu], index) => (
         <List
           key={index}
@@ -29,6 +29,6 @@ export default function () {
           ))}
         </List>
       ))}
-    </div>
+    </>
   );
 }
