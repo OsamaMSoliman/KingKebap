@@ -36,15 +36,15 @@ export default function Navbar() {
           className={`absolute top-full left-0 z-10 w-full bg-gray-800 md:hidden ${isOpen ? "block" : "hidden"}`}
         >
           <div className="flex flex-col space-y-2 p-4">
-            <a href="/about" className="text-gray-300 hover:text-white">
-              About
-            </a>
             <a
               href="/cart"
               className="flex items-center text-gray-300 hover:text-white"
             >
               <ShoppingCart className="mr-1 h-5 w-5" />
               Cart
+            </a>
+            <a href="/about" className="text-gray-300 hover:text-white">
+              About
             </a>
           </div>
         </div>

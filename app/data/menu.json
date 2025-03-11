@@ -84,7 +84,7 @@
   },
   "Pizza": {
     "description": "Alle Pizza mit Tomatensauce und Goudakäse",
-    "note": "26cm / 30cm",
+    "note": "Ø 26cm / 30cm",
     "items": [
       {"id": "55", "title": "Margherita", "prices": ["6,00", "7,00"], "description": "mit Goudakäse"},
       {"id": "56", "title": "Funghi", "prices": ["7,00", "8,50"], "description": "mit Champignons"},
