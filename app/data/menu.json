@@ -1,13 +1,12 @@
 {
   "Taschen Gerichte": {
     "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch",
-    "prices": [ "normal", "jumbo" ],
-    "img": "",
+    "note": "normal / jumbo" ,
     "items": [
       {"id": "01", "title": "Döner Tasche", "prices":[ "6,50","8,50"],  "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch"},
-      {"id": "02", "title": "Döner Dürüm", "prices":[ "7,00", null], "description": "Dönerfleisch im Fladenbrot mit Salat"},
+      {"id": "02", "title": "Döner Dürüm", "prices":[ "7,00"], "description": "Dönerfleisch im Fladenbrot mit Salat"},
       {"id": "03", "title": "Sucuk Tasche", "prices":[ "6,50","8,50"],  "description": "türk. Knoblauchwurst im Fladenbrot mit Salat"},
-      {"id": "04", "title": "Sucuk Dürüm", "prices":[ "7,00",null], "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat"},
+      {"id": "04", "title": "Sucuk Dürüm", "prices":[ "7,00"], "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat"},
       {"id": "05", "title": "Schnitzel Tasche", "prices":[ "6,50","8,50"],  "description": "Hähnchenschnitzel im Fladenbrot mit Salat"},
       {"id": "06", "title": "Pommes Tasche", "prices":[ "5,00","6,50"],  "description": "Pommes mit Sauce im Fladenbrot mit Salat"},
       {"id": "07", "title": "King Tasche", "prices":[ "7,00","9,00"],  "description": "Dönerfleisch und Sucuk im Fladenbrot mit Salat"}
@@ -15,19 +14,19 @@
   },
   "Teller Gerichte": {
     "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch",
-    "prices": [ "klein", "groß" ],
+    "note": "klein / groß" ,
     "items": [
-      {"id": "10", "title": "Döner Teller", "prices": [null, "10,00"], "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch mit Salat und Pommes oder Reis"},
+      {"id": "10", "title": "Döner Teller", "prices": ["10,00"], "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch mit Salat und Pommes oder Reis"},
       {"id": "11", "title": "Döner Box", "prices": ["6,00", "7,00"], "description": "Dönerfleisch im Box mit Pommes"},
       {"id": "12", "title": "Döner Schale", "prices": ["7,50", "10,00"], "description": "Dönerfleisch ohne alles"},
-      {"id": "13", "title": "Taxi Teller", "prices": [null, "11,00"], "description": "Dönerfleisch mit Bratwurst, Salat und Pommes oder Reis"},
-      {"id": "14", "title": "Sucuk Teller", "prices": [null, "10,00"], "description": "türk. Knoblauchwurst mit Salat und Pommes oder Reis"},
-      {"id": "15", "title": "Döner Überbacken", "prices": [null, "11,00"], "description": "Döner überbacken mit Goudakäse"},
-      {"id": "16", "title": "Döner Hollandaise", "prices": [null, "12,00"], "description": "Döner überbacken mit Gouda & Sauce Hollandaise"}  
+      {"id": "13", "title": "Taxi Teller", "prices": ["11,00"], "description": "Dönerfleisch mit Bratwurst, Salat und Pommes oder Reis"},
+      {"id": "14", "title": "Sucuk Teller", "prices": ["10,00"], "description": "türk. Knoblauchwurst mit Salat und Pommes oder Reis"},
+      {"id": "15", "title": "Döner Überbacken", "prices": ["11,00"], "description": "Döner überbacken mit Goudakäse"},
+      {"id": "16", "title": "Döner Hollandaise", "prices": ["12,00"], "description": "Döner überbacken mit Gouda & Sauce Hollandaise"}  
     ]
   },
   "Imbiss Gerichte": {
-    "prices": [ "normal", "jumbo" ],
+    "note": "normal / jumbo" ,
     "items": [
       {"id": "20", "title": "Pommes", "prices":[ "3,00", "3,50"]},
       {"id": "21", "title": "Currywurst", "prices":[ "5,00"], "description": "mit Pommes"},
@@ -46,7 +45,7 @@
     ]
   },
   "Salate": {
-    "prices": [ "klein", "groß" ],
+    "note": "klein / groß" ,
     "items": [
       {"id": "30", "title": "Gemischter Salat", "prices": ["5,00", "7,00"], "description": "Eisberg, Tomaten, Gurken, Zwiebeln, Krautsalat"},
       {"id": "31", "title": "Bauern Salat", "prices": ["4,50", "6,50"], "description": "Tomaten, Gurken, Zwiebeln"},
@@ -85,7 +84,7 @@
   },
   "Pizza": {
     "description": "Alle Pizza mit Tomatensauce und Goudakäse",
-    "prices": [ "26cm", "30cm" ],
+    "note": "26cm / 30cm",
     "items": [
       {"id": "55", "title": "Margherita", "prices": ["6,00", "7,00"], "description": "mit Goudakäse"},
       {"id": "56", "title": "Funghi", "prices": ["7,00", "8,50"], "description": "mit Champignons"},
@@ -102,7 +101,7 @@
     ]
   },
   "Pizzabrötchen": {
-    "img": "(je 6 Stück)",
+    "note": "(je 6 Stück)",
     "description": "Alle Pizzabrötchen mit Tomatensauce und Goudakäse",
     "items": [
       {"id": "71", "title": "Margherita", "prices": ["6,00"] },
@@ -117,12 +116,12 @@
   },
   "Getränke": {
     "items": [
-      {"title": "Cola, Fanta, Sprite, Mezzo, Uludag", "size": "0.33l", "prices": ["2,00"]},
-      {"title": "Stilles Wasser, Mineralwasser", "size": "0.5l", "prices": ["2,00"]},
-      {"title": "Ayran", "size": "0.25l", "prices": ["1,50"]},
-      {"title": "Durstlöscher", "size": "0.5l", "prices": ["1,50"]},
-      {"title": "Red Bull", "size": "0.25l", "prices": ["2,50"]},
-      {"title": "Cola, Fanta, Sprite", "size": "1.0l", "prices": ["3,00"]}
+      {"id":"79","title": "Cola, Fanta, Sprite, Mezzo, Uludag", "size": "0.33l", "prices": ["2,00"]},
+      {"id":"80","title": "Stilles Wasser, Mineralwasser", "size": "0.5l", "prices": ["2,00"]},
+      {"id":"81","title": "Ayran", "size": "0.25l", "prices": ["1,50"]},
+      {"id":"82","title": "Durstlöscher", "size": "0.5l", "prices": ["1,50"]},
+      {"id":"83","title": "Red Bull", "size": "0.25l", "prices": ["2,50"]},
+      {"id":"84","title": "Cola, Fanta, Sprite", "size": "1.0l", "prices": ["3,00"]}
     ]
   }
 }

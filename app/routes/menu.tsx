@@ -14,14 +14,14 @@ export default function () {
             <Header
               title={title}
               description={"description" in menu ? menu.description : undefined}
-              prices={"prices" in menu ? menu.prices : []}
-              note={"img" in menu ? menu.img : undefined}
+              note={"note" in menu ? menu.note : undefined}
             />
           }
         >
           {menu.items.map((item, index) => (
             <Item
               key={index}
+              id={item.id}
               title={item.title}
               prices={item.prices}
               description={"description" in item ? item.description : undefined}

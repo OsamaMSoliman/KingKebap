@@ -9,7 +9,9 @@ export default function ({ header, children }: IProps) {
       {header}
       <ul>
         {children.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index} className="my-2">
+            {item}
+          </li>
         ))}
       </ul>
     </div>
