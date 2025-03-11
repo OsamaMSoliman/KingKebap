@@ -20,8 +20,8 @@ export default function Home() {
         </header>
         <main className="overflow-y-scroll">
           {/* <main className="mx-auto w-[80vw] max-w-[960px] min-w-[400px]"> */}
+          <Offers />
           <Menu />
-          {/* <Offers /> */}
           <FAB />
         </main>
         <footer className="bg-gray-800 p-4 text-center">

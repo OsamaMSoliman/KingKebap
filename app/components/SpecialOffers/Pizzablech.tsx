@@ -1,79 +1,83 @@
-interface IProps {}
+import { useState } from "react";
 
-export default function ({}: IProps) {
-  return (
-    <div className="bg-white p-4 m-4 flex">
-      <p className="text-red-500 font-bold text-5xl">Pizzablech 60x40cm</p>
-
-      <div className="grow flex-col space-y-2 ml-16">
-        <div className="flex items-center">
-          <div
-            className="w-0"
-            style={{
-              borderLeft: "2em solid white",
-              borderBottom: "2.5em solid var(--color-red-500)",
-            }}
-          />
-          <p className="flex-1 bg-red-500 font-bold text-4xl">
-            25,-
-            <span className="text-black text-xl ml-4">
-              Basisbelag + 3€ pro Belag
-            </span>
-          </p>
-        </div>
-
-        <div className="flex items-center">
-          <div
-            className="w-0"
-            style={{
-              borderLeft: "2em solid white",
-              borderBottom: "2.5em solid var(--color-red-500)",
-            }}
-          />
-          <p className="flex-1 bg-red-500 font-bold text-4xl">
-            30,-
-            <span className="text-black text-xl ml-4">
-              mit 3 Zutaten nach Wahl
-            </span>
-          </p>
-        </div>
-      </div>
-    </div>
-  );
+interface IProps {
+  basePrice?: number;
+  pricePerZutat?: number;
+  specialOfferPrice?: number;
 }
 
-// export default function ({}: IProps) {
-//   return (
-//     <div className="bg-white p-4 m-4">
-//       <p className="text-red-500 font-bold text-4xl">Pizzablech 60x40cm</p>
+export default function ({
+  basePrice = 25,
+  pricePerZutat = 3,
+  specialOfferPrice = 30,
+}: IProps) {
+  const [selectedZutaten, setSelectedZutaten] = useState<string[]>([]);
 
-//       <div className="flex items-center">
-//         <p className="flex-3 ml-16 text-black font-bold text-2xl">mit 3 Zutaten nach Wahl</p>
-//         <div
-//           className="w-0"
-//           style={{
-//             borderLeft: "2em solid white",
-//             borderBottom: "2.25em solid var(--color-red-500)",
-//           }}
-//         />
-//         <p className="flex-1 bg-red-500 font-bold text-3xl">
-//           30,-
-//         </p>
-//       </div>
+  // Calculate total price
+  const totalPrice =
+    selectedZutaten.length === 3
+      ? specialOfferPrice
+      : basePrice + selectedZutaten.length * pricePerZutat;
 
-//       <div className="flex items-center">
-//         <p className="flex-3 ml-16 text-black font-bold text-2xl">Basisbelag 25,00€ + 3€ pro Belag</p>
-//         <div
-//           className="w-0"
-//           style={{
-//             borderLeft: "2em solid white",
-//             borderBottom: "2.25em solid var(--color-red-500)",
-//           }}
-//         />
-//         <p className="flex-1 bg-red-500 font-bold text-3xl">
-//           30,-
-//         </p>
-//       </div>
-//     </div>
-//   );
-// }
+  // Toggle Zutaten selection
+  const toggleZutat = (zutat: string) => {
+    if (selectedZutaten.includes(zutat)) {
+      setSelectedZutaten(selectedZutaten.filter((item) => item !== zutat));
+    } else {
+      setSelectedZutaten([...selectedZutaten, zutat]);
+    }
+  };
+
+  return (
+    <>
+      <div className="m-4 flex min-w-sm flex-col gap-4 rounded-lg bg-white">
+        <div className="mx-5 mt-2 text-center">
+          <h3 className="mb-2 text-3xl font-bold text-red-500">
+            Pizzablech 60x40cm 🍕
+          </h3>
+          <p className="mb-2 text-gray-600">Basisbelag 25,00€ + 3€ pro Belag</p>
+
+          <div className="flex items-baseline justify-between">
+            <p className="py-1.5 text-gray-600">Wähle deine Zutaten:</p>
+            {selectedZutaten.length === 3 && (
+              <p className="rounded-b-sm border-b border-dashed text-lg font-bold text-green-500">
+                ✨Sonderangebot✨
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="mx-3 mb-2 flex gap-4">
+          {/* Zutaten Grid */}
+          <div className="mb-4 grid flex-5 grid-cols-4 gap-2 text-black">
+            {["A", "B", "C", "D", "E", "F", "G", "H"].map((zutat) => (
+              <button
+                key={zutat}
+                onClick={() => toggleZutat(zutat)}
+                className={`rounded-lg border-2 p-2 transition-all ${
+                  selectedZutaten.includes(zutat)
+                    ? "border-orange-500 bg-orange-50"
+                    : "border-transparent bg-gray-100"
+                }`}
+              >
+                {zutat}
+              </button>
+            ))}
+          </div>
+
+          <button
+            className="flex flex-1 items-center justify-center bg-red-500 pr-2 pl-8 hover:bg-red-700"
+            // className="flex flex-1 items-center justify-center bg-red-500 px-5 hover:bg-red-700"
+            style={{
+              clipPath: "polygon(100% 0,  100% 100%, 25% 100%, 0 50%, 25% 0)",
+              // clipPath:
+              // "polygon( 25% 0, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0 50% )",
+            }}
+          >
+            <p className="text-3xl font-bold text-nowrap oldstyle-nums tabular-nums">{`${totalPrice.toFixed(2)} Є`}</p>
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}

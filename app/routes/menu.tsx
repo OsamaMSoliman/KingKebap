@@ -7,6 +7,7 @@ import MENU from "~/data/menu.json";
 export default function () {
   return (
     <>
+      <p className="text-center text-6xl font-extrabold">Speisekarte</p>
       {Object.entries(MENU).map(([title, menu], index) => (
         <List
           key={index}
