@@ -10,5 +10,6 @@ export default [
     index("routes/home.tsx"),
     route("menu", "routes/menu.tsx"),
     route("offers", "routes/offers.tsx"),
+    route("combo-meals", "routes/combo-meals.tsx"),
   ]),
 ] satisfies RouteConfig;
