@@ -2,6 +2,7 @@ import type { Route } from "./+types/home";
 import Menu from "./menu";
 import Offers from "./offers";
 import ComboMeals from "./combo-meals";
+import Cart from "~/components/cart/Cart";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,6 +14,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
+      {/* <Cart /> */}
       <ComboMeals />
       <Menu />
       <Offers />
