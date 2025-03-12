@@ -35,7 +35,9 @@ export default function () {
               />
             ))}
           </List>
-          {title === "Pizza" && <Pizzablech />}
+          {title.split(" ").some((word) => word === "Pizza") && (
+            <Pizzablech key={i} />
+          )}
         </>
       ))}
     </>

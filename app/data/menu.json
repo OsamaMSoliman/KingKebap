@@ -1,14 +1,14 @@
 {
-  "Taschen Gerichte": {
+  "Taschen Gerichte 🥙": {
     "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch",
     "note": "normal / jumbo" ,
     "items": [
       {"id": "01", "title": "Döner Tasche", "prices":[ "6,50","8,50"],  "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch"},
-      {"id": "02", "title": "Döner Dürüm", "prices":[ "7,00"], "description": "Dönerfleisch im Fladenbrot mit Salat"},
+      {"id": "02", "title": "Döner Dürüm 🌯", "prices":[ "7,00"], "description": "Dönerfleisch im Fladenbrot mit Salat"},
       {"id": "03", "title": "Sucuk Tasche", "prices":[ "6,50","8,50"],  "description": "türk. Knoblauchwurst im Fladenbrot mit Salat"},
-      {"id": "04", "title": "Sucuk Dürüm", "prices":[ "7,00"], "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat"},
+      {"id": "04", "title": "Sucuk Dürüm 🌯", "prices":[ "7,00"], "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat"},
       {"id": "05", "title": "Schnitzel Tasche", "prices":[ "6,50","8,50"],  "description": "Hähnchenschnitzel im Fladenbrot mit Salat"},
-      {"id": "06", "title": "Pommes Tasche", "prices":[ "5,00","6,50"],  "description": "Pommes mit Sauce im Fladenbrot mit Salat"},
+      {"id": "06", "title": "Pommes Tasche 🍟", "prices":[ "5,00","6,50"],  "description": "Pommes mit Sauce im Fladenbrot mit Salat"},
       {"id": "07", "title": "King Tasche", "prices":[ "7,00","9,00"],  "description": "Dönerfleisch und Sucuk im Fladenbrot mit Salat"}
     ]
   },
@@ -28,7 +28,7 @@
   "Imbiss Gerichte": {
     "note": "normal / jumbo" ,
     "items": [
-      {"id": "20", "title": "Pommes", "prices":[ "3,00", "3,50"]},
+      {"id": "20", "title": "Pommes 🍟", "prices":[ "3,00", "3,50"]},
       {"id": "21", "title": "Currywurst", "prices":[ "5,00"], "description": "mit Pommes"},
       {"id": "22", "title": "Nuggets", "prices":[ "5,00"], "description": "& Stück mit Sauce"},
       {"id": "23", "title": "Nuggets Box", "prices":[ "7,00"], "description": "6 Stück mit Pommes und Sauce"},
@@ -44,7 +44,7 @@
       {"id": "29", "title": "Balkan Schnitzel", "prices": ["10,00"], "description": "mit Salat und Pommes"}  
     ]
   },
-  "Salate": {
+  "Salate 🥗": {
     "note": "klein / groß" ,
     "items": [
       {"id": "30", "title": "Gemischter Salat", "prices": ["5,00", "7,00"], "description": "Eisberg, Tomaten, Gurken, Zwiebeln, Krautsalat"},
@@ -60,7 +60,7 @@
       {"id": "37", "title": "Dürüm Salat", "prices": ["5,50"], "description": "Gemischter Salat im Blätterteig mit Saucen"},
       {"id": "38", "title": "Falafel Tasche", "prices": ["6,50"], "description": "Kichererbsenfrikadellen im Fladenbrot mit Salat und Saucen"},
       {"id": "39", "title": "Falafel Dürüm", "prices": ["7,00"], "description": "Kichererbsenfrikadellen im Blätterteig mit Salat und Saucen"},
-      {"id": "40", "title": "Falafel Teller", "prices": ["10,00"], "description": "Kichererbsenfrikadellen mit Pommes oder Reis mit Salat"}
+      {"id": "40", "title": "Falafel Teller 🧆", "prices": ["10,00"], "description": "Kichererbsenfrikadellen mit Pommes oder Reis mit Salat"}
   
     ]
   },
@@ -82,7 +82,7 @@
       {"id": "52", "title": "Sucuklu Pide", "prices":[ "8,00"], "description": "Teigschiffchen mit türk. Knoblauchwurst und Goud"}  
     ]
   },
-  "Pizza": {
+  "Pizza 🍕": {
     "description": "Alle Pizza mit Tomatensauce und Goudakäse",
     "note": "Ø 26cm / 30cm",
     "items": [
