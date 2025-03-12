@@ -23,7 +23,7 @@ export default function AboutUs({ isOpen = false }: IProps) {
         </tr>
         <caption className="caption-bottom">
           <MapPinIcon className="mx-1 inline-block h-5 w-5" />
-          Bachstrase 2 58762 Altena
+          Bachstrase 2 • 58762 Altena
         </caption>
       </table>
       <p>
@@ -43,7 +43,7 @@ export default function AboutUs({ isOpen = false }: IProps) {
         </span>
         <span className="mr-100">
           <MapPinIcon className="mx-1 inline-block h-5 w-5" />
-          Bachstrase 2 58762 Altena
+          Bachstrase 2 • 58762 Altena
         </span>
         <span className="">
           <PhoneIcon className="mx-1 inline-block h-5 w-5" />

@@ -22,13 +22,13 @@ export default function AppLayout() {
         <ScrollArea className="h-full">
           <Outlet />
         </ScrollArea>
-        <FAB />
+        {/* <FAB /> */}
       </main>
       {/* Footer */}
       <footer
         className="cursor-pointer overflow-hidden bg-gray-800 p-4 text-center transition-all duration-300 ease-in-out"
         onClick={toggleFooter}
-        style={{ height: isCollapsed ? "10em" : "100em" }}
+        style={{ height: isCollapsed ? "10em" : "110em" }}
       >
         <AboutUs isOpen={!isCollapsed} />
       </footer>
