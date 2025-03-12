@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Menu, ShoppingCart } from "lucide-react"; // Using lucide-react icons from shadcn/ui
+import { useCartStore } from "~/stores/CartStore";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = useCartStore((state) => state.toggle);
 
   return (
     <nav className="bg-gray-800 p-4">
@@ -24,7 +27,7 @@ export default function Navbar() {
         {/* Cart Icon (Always Visible) */}
         <div className="flex items-center space-x-4">
           <a
-            // href="/cart"
+            onClick={toggle}
             className="flex items-center text-gray-300 hover:text-white"
           >
             <ShoppingCart className="mr-1 h-5 w-5" />

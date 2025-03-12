@@ -13,14 +13,16 @@ export default function AboutUs({ isOpen = false }: IProps) {
           <TruckIcon className="mx-1 inline-block h-5 w-5" />
           Lieferung ab 15€ Bestellwert frei Haus
         </caption>
-        <tr>
-          <td>Taglich:</td>
-          <td>12:00-22:00 Uhr</td>
-        </tr>
-        <tr>
-          <td>Sonn- & Feiertage:</td>
-          <td>13:00-22:00 Uhr</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Taglich:</td>
+            <td>12:00-22:00 Uhr</td>
+          </tr>
+          <tr>
+            <td>Sonn- & Feiertage:</td>
+            <td>13:00-22:00 Uhr</td>
+          </tr>
+        </tbody>
         <caption className="caption-bottom">
           <MapPinIcon className="mx-1 inline-block h-5 w-5" />
           Bachstrase 2 • 58762 Altena

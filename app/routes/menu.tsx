@@ -9,10 +9,10 @@ export default function () {
   return (
     <>
       <p className="my-4 text-center text-6xl font-extrabold">Speisekarte</p>
-      {Object.entries(MENU).map(([title, menu], index) => (
+      {Object.entries(MENU).map(([title, menu], i) => (
         <>
           <List
-            key={index}
+            key={`List-${i}`}
             header={
               <Header
                 title={title}
@@ -23,9 +23,9 @@ export default function () {
               />
             }
           >
-            {menu.items.map((item, index) => (
+            {menu.items.map((item, j) => (
               <Item
-                key={index}
+                key={`Item-${i}-${j}`}
                 id={item.id}
                 title={item.title}
                 prices={item.prices}

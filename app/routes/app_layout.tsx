@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
 import AboutUs from "~/components/about-us/AboutUs";
+import Cart from "~/components/cart/Cart";
 import FAB from "~/components/floating-action-button/FAB";
 import Navbar from "~/components/nav-bar/NavBar";
 import { ScrollArea } from "~/components/ui/scroll-area";
@@ -23,6 +24,7 @@ export default function AppLayout() {
           <Outlet />
         </ScrollArea>
         {/* <FAB /> */}
+        <Cart />
       </main>
       {/* Footer */}
       <footer

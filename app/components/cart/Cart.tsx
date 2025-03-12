@@ -14,15 +14,19 @@ import {
   SheetTitle,
 } from "~/components/ui/sheet";
 import { Button } from "~/components/ui/button";
+import { useCartStore } from "~/stores/CartStore";
 
 interface IProps {
-  open: boolean;
-  setOpen?(open: boolean): void;
+  // open: boolean;
+  // setOpen?(open: boolean): void;
 }
 
-export default function Cart({ open, setOpen }: IProps) {
+export default function Cart({}: IProps) {
+  const show = useCartStore((state) => state.show);
+  const toggle = useCartStore((state) => state.toggle);
+
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={show} onOpenChange={toggle}>
       {/* <SheetTrigger asChild>
         <Button variant="outline">Open</Button>
       </SheetTrigger> */}
