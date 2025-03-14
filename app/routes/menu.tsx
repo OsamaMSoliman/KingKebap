@@ -32,6 +32,8 @@ export default function () {
                 description={
                   "description" in item ? item.description : undefined
                 }
+                note={"note" in item ? item.note : undefined}
+                options={"options" in item ? item.options : undefined}
               />
             ))}
           </List>

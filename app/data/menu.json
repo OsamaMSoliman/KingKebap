@@ -3,8 +3,8 @@
     "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch",
     "note": "normal / jumbo" ,
     "items": [
-      {"id": "01", "title": "Döner Tasche", "prices":[ "6,50","8,50"],  "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch"},
-      {"id": "02", "title": "Döner Dürüm 🌯", "prices":[ "7,00"], "description": "Dönerfleisch im Fladenbrot mit Salat"},
+      {"id": "01", "title": "Döner Tasche", "prices":[ "6,50","8,50"],  "description": "Dönerfleisch nach Wahl aus Kalb- oder Hähnchenfleisch im Fladenbrot mit Salat", "options":[["Kalb-", "Hähnchenfleisch"]], "note":"2,3,4,A,G"},
+      {"id": "02", "title": "Döner Dürüm 🌯", "prices":[ "7,00"], "description": "Dönerfleisch nach Wahl aus Kalb- oder Hähnchenfleisch eingerollt im Dürüm mit Salat", "options":[["Kalb-", "Hähnchenfleisch"]]},
       {"id": "03", "title": "Sucuk Tasche", "prices":[ "6,50","8,50"],  "description": "türk. Knoblauchwurst im Fladenbrot mit Salat"},
       {"id": "04", "title": "Sucuk Dürüm 🌯", "prices":[ "7,00"], "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat"},
       {"id": "05", "title": "Schnitzel Tasche", "prices":[ "6,50","8,50"],  "description": "Hähnchenschnitzel im Fladenbrot mit Salat"},
@@ -16,7 +16,7 @@
     "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch",
     "note": "klein / groß" ,
     "items": [
-      {"id": "10", "title": "Döner Teller", "prices": ["10,00"], "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch mit Salat und Pommes oder Reis"},
+      {"id": "10", "title": "Döner Teller", "prices": ["10,00"], "description": "Dönergerichte nach Wahl aus Kalb- oder Hähnchenfleisch mit Salat und Pommes oder Reis", "options":[["Kalb-", "Hähnchenfleisch"], ["Pommes", "Reis"]]},
       {"id": "11", "title": "Döner Box", "prices": ["6,00", "7,00"], "description": "Dönerfleisch im Box mit Pommes"},
       {"id": "12", "title": "Döner Schale", "prices": ["7,50", "10,00"], "description": "Dönerfleisch ohne alles"},
       {"id": "13", "title": "Taxi Teller", "prices": ["11,00"], "description": "Dönerfleisch mit Bratwurst, Salat und Pommes oder Reis"},
