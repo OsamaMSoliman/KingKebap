@@ -1,7 +1,6 @@
+import React from "react";
 import { Button } from "../ui/button";
 
-import { Tabs, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { ToggleGroup, ToggleGroupItem } from "~/components/ui/toggle-group";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +13,7 @@ import {
 import { DialogClose } from "@radix-ui/react-dialog";
 
 import { options as OPTIONS } from "~/data/menu.json";
+import { ToggleGroup, ToggleItem } from "../toggle-group/ToggleGroup";
 
 interface IProps {
   id?: string;
@@ -32,6 +32,8 @@ export default function ({
   prices,
   options = [],
 }: IProps) {
+  console.log({ options });
+
   return (
     <div className="w-fill flex items-center">
       <p className="m-1 border-y-2 font-bold slashed-zero tabular-nums">
@@ -55,7 +57,7 @@ export default function ({
             ))}
             <DialogContent className="text-black">
               <DialogHeader>
-                <DialogTitle>Options:</DialogTitle>
+                <DialogTitle>Auswahlmöglichkeiten:</DialogTitle>
                 <DialogDescription>
                   Price doesn't change with options.
                 </DialogDescription>
@@ -82,12 +84,14 @@ export default function ({
                     </ToggleGroup>
                   </div>
                 ))} */}
-                {Object.entries(OPTIONS).map(([key, values], i) => (
+                {/* {Object.entries(OPTIONS).map(([key, values], i) => (
                   <div key={i} className="mb-8">
                     <p className="mb-2 font-semibold">{key}:</p>
                     <Tabs defaultValue={values[0]}>
-                      <TabsList className="h-auto w-full flex-wrap gap-x-3">
-                        {/* <TabsList className="grid h-auto grid-cols-4 gap-2"> */}
+                      <TabsList
+                        className="h-auto w-full flex-wrap gap-x-3"
+                        // className="grid h-auto grid-cols-4 gap-2"
+                      >
                         {values.map((value, j) => (
                           <TabsTrigger
                             key={j}
@@ -100,7 +104,36 @@ export default function ({
                       </TabsList>
                     </Tabs>
                   </div>
-                ))}
+                ))} */}
+                {Object.entries(OPTIONS).map(([key, values], i) => {
+                  const isMultiple = values.length > 1;
+
+                  const [value, setValue] = React.useState<string | string[]>(
+                    isMultiple ? [values[0]] : values[0],
+                  );
+
+                  return (
+                    <div key={i} className="mb-8">
+                      <p className="mb-2 font-semibold">{key}:</p>
+                      <ToggleGroup
+                        value={value}
+                        onValueChange={setValue}
+                        multiple={isMultiple}
+                        className="h-auto w-full flex-wrap gap-x-3 gap-y-1"
+                      >
+                        {values.map((value, j) => (
+                          <ToggleItem
+                            key={j}
+                            value={value}
+                            className="flex-auto"
+                          >
+                            {value}
+                          </ToggleItem>
+                        ))}
+                      </ToggleGroup>
+                    </div>
+                  );
+                })}
               </div>
               {/* <Tabs defaultValue="beef">
                 <TabsList className="w-full">
