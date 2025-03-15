@@ -1,10 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { options as OverallOptions } from "~/data/menu.json";
 
 import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -33,6 +34,8 @@ export default function ({
   prices,
   options = [],
 }: IProps) {
+  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+
   return (
     <div className="w-fill flex items-center">
       <p className="m-1 border-y-2 font-bold slashed-zero tabular-nums">
@@ -46,8 +49,12 @@ export default function ({
           </div>
           <Dialog>
             {prices.map((price, i) => (
-              <DialogTrigger asChild key={i}>
-                <Button variant="ghost" className="bg-gray-900">
+              <DialogTrigger asChild key={i} value={price}>
+                <Button
+                  variant="ghost"
+                  className="bg-gray-900"
+                  onClick={() => setSelectedPrice(price)}
+                >
                   <p className="min-w-16 text-base tabular-nums md:min-w-20">
                     {price} Є
                   </p>
@@ -57,9 +64,9 @@ export default function ({
             <DialogContent className="text-black">
               <DialogHeader>
                 <DialogTitle>Auswahlmöglichkeiten:</DialogTitle>
-                {/* <DialogDescription>
-                  Der Preis wird nicht beeinflusst
-                </DialogDescription> */}
+                <DialogDescription>
+                  Der Preis bleibt {selectedPrice} und wird nicht beeinflusst
+                </DialogDescription>
               </DialogHeader>
               <div className="w-full">
                 {Object.values(options).map((option, i) => {
@@ -67,7 +74,7 @@ export default function ({
                     OverallOptions[option as keyof typeof OverallOptions];
                   const isMultiple = false; // values.length > 1;
 
-                  const [value, setValue] = React.useState<string | string[]>(
+                  const [value, setValue] = useState<string | string[]>(
                     isMultiple ? [optionValues[0]] : optionValues[0],
                   );
 
