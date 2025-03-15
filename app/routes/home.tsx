@@ -10,9 +10,30 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+function isMondayOrTuesday() {
+  const today = new Date(); // Get the current date
+  // console.log(
+  //   today,
+  //   today.getDay(),
+  //   today.toLocaleDateString(),
+  //   today.toLocaleTimeString(),
+  //   today.toLocaleString(),
+  // );
+  return {
+    isMonday: today.getDay() === 1, //  (1 corresponds to Monday)
+    isTuesday: today.getDay() === 4, //  (1 corresponds to Teusday)
+  };
+}
+
 export default function Home() {
+  const { isMonday, isTuesday } = isMondayOrTuesday();
+
   return (
     <>
+      <div>
+        {isMonday ? <p>Today is Monday!</p> : <p>Today is not Monday.</p>}
+        {isTuesday ? <p>Today is Tuesday!</p> : <p>Today is not Tuesday.</p>}
+      </div>
       {/* TODO: show the offer of the day on top, maybe in the navbar ?*/}
       <ComboMeals />
       <Menu />
