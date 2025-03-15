@@ -1,22 +1,23 @@
 import React from "react";
-import { Button } from "../ui/button";
+import { options as OverallOptions } from "~/data/menu.json";
 
+import { Button } from "~/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-
-import { options as OPTIONS } from "~/data/menu.json";
-import { ToggleGroup, ToggleItem } from "../toggle-group/ToggleGroup";
+import { Checkbox } from "~/components/ui/checkbox";
+import { Textarea } from "~/components/ui/textarea";
+import { ToggleGroup, ToggleItem } from "~/components/toggle-group/ToggleGroup";
+import { ShoppingCart } from "lucide-react";
 
 interface IProps {
-  id?: string;
+  id: string;
   title: string;
   note?: string;
   description?: string;
@@ -32,8 +33,6 @@ export default function ({
   prices,
   options = [],
 }: IProps) {
-  console.log({ options });
-
   return (
     <div className="w-fill flex items-center">
       <p className="m-1 border-y-2 font-bold slashed-zero tabular-nums">
@@ -58,70 +57,47 @@ export default function ({
             <DialogContent className="text-black">
               <DialogHeader>
                 <DialogTitle>Auswahlmöglichkeiten:</DialogTitle>
-                <DialogDescription>
-                  Price doesn't change with options.
-                </DialogDescription>
+                {/* <DialogDescription>
+                  Der Preis wird nicht beeinflusst
+                </DialogDescription> */}
               </DialogHeader>
               <div className="w-full">
-                {/* {Object.entries(OPTIONS).map(([key, values], i) => (
-                  <div key={i} className="mb-8">
-                    <p className="mb-2 font-semibold">{key}:</p>
-                    <ToggleGroup
-                      type="multiple"
-
-                      defaultValue={values[0]}
-                      className="h-auto w-full flex-wrap"
-                    >
-                      {values.map((value, j) => (
-                        <ToggleGroupItem
-                          key={j}
-                          value={value}
-                          className="flex-auto"
-                        >
-                          {value}
-                        </ToggleGroupItem>
-                      ))}
-                    </ToggleGroup>
-                  </div>
-                ))} */}
-                {/* {Object.entries(OPTIONS).map(([key, values], i) => (
-                  <div key={i} className="mb-8">
-                    <p className="mb-2 font-semibold">{key}:</p>
-                    <Tabs defaultValue={values[0]}>
-                      <TabsList
-                        className="h-auto w-full flex-wrap gap-x-3"
-                        // className="grid h-auto grid-cols-4 gap-2"
-                      >
-                        {values.map((value, j) => (
-                          <TabsTrigger
-                            key={j}
-                            value={value}
-                            className="flex-initial"
-                          >
-                            {value}
-                          </TabsTrigger>
-                        ))}
-                      </TabsList>
-                    </Tabs>
-                  </div>
-                ))} */}
-                {Object.entries(OPTIONS).map(([key, values], i) => {
-                  const isMultiple = values.length > 1;
+                {Object.values(options).map((option, i) => {
+                  const optionValues =
+                    OverallOptions[option as keyof typeof OverallOptions];
+                  const isMultiple = false; // values.length > 1;
 
                   const [value, setValue] = React.useState<string | string[]>(
-                    isMultiple ? [values[0]] : values[0],
+                    isMultiple ? [optionValues[0]] : optionValues[0],
                   );
+
+                  if (
+                    optionValues[0] === "true" ||
+                    optionValues[0] === "false"
+                  ) {
+                    return (
+                      <div key={i} className="mb-8 flex items-center space-x-2">
+                        <Checkbox id={option} defaultChecked />
+                        <label
+                          htmlFor={option}
+                          className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {option}
+                        </label>
+                      </div>
+                    );
+                  }
 
                   return (
                     <div key={i} className="mb-8">
-                      <p className="mb-2 font-semibold">{key}:</p>
+                      <p className="mb-2 font-semibold">{option}:</p>
                       <ToggleGroup
                         value={value}
                         onValueChange={setValue}
                         multiple={isMultiple}
                         className="h-auto w-full flex-wrap gap-x-3 gap-y-1"
                       >
-                        {values.map((value, j) => (
+                        {optionValues.map((value, j) => (
                           <ToggleItem
                             key={j}
                             value={value}
@@ -134,37 +110,22 @@ export default function ({
                     </div>
                   );
                 })}
+                <Textarea placeholder="Anmerkungen zur Bestellung" />
               </div>
-              {/* <Tabs defaultValue="beef">
-                <TabsList className="w-full">
-                  <TabsTrigger value="beef">Kalbfleisch</TabsTrigger>
-                  <TabsTrigger value="chicken">Hähnchenfleisch</TabsTrigger>
-                </TabsList>
-              </Tabs> */}
-
-              {/* <ToggleGroup
-                type="single"
-                defaultValue="bold"
-                defaultChecked
-                className="w-full"
-              >
-                <ToggleGroupItem value="bold">A</ToggleGroupItem>
-                <ToggleGroupItem value="italic">B</ToggleGroupItem>
-                <ToggleGroupItem value="strikethrough">C</ToggleGroupItem>
-              </ToggleGroup> */}
-
               <DialogFooter>
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">
-                    Close
+                    Abbrechen
                   </Button>
                 </DialogClose>
-                <Button type="submit">Place order</Button>
+                <Button type="submit">
+                  Zum <ShoppingCart className="mr-1 h-5 w-5" /> hinzufügen
+                </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
         </div>
-        <p className="text-red-500">{description}</p>
+        {description && <p className="text-red-500">{description}</p>}
       </div>
     </div>
   );

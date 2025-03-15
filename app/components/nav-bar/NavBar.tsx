@@ -32,7 +32,7 @@ export default function Navbar() {
             className="flex items-center text-gray-300 hover:text-white"
           >
             <ShoppingCart className="mr-1 h-5 w-5" />
-            <span className="hidden md:inline">Cart</span>
+            <span className="hidden md:inline">Warenkorb</span>
           </a>
 
           {/* Notification */}

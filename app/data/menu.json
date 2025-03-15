@@ -12,7 +12,7 @@
       "Champignons",
       "Extra Käse"
     ],
-    "Sauce": [
+    "Saucen": [
       "Tzatziki",
       "Jägersauce",
       "Balkansauce",
@@ -21,7 +21,8 @@
       "Currysauce",
       "Knoblauchsauce"
     ],
-    "Salatdressing": ["Essig-Öl", "Joghurt", "Kräuter"]
+    "Salatdressing": ["Essig-Öl", "Joghurt", "Kräuter"],
+    "Salat": ["true", "false"]
   },
   "dishes": {
     "Taschen Gerichte 🥙": {
@@ -33,15 +34,13 @@
           "title": "Döner Tasche",
           "prices": ["6,50", "8,50"],
           "description": "Dönerfleisch im Fladenbrot mit Salat",
-          "options": ["Dönerfleisch"],
           "note": "2,3,4,A,G"
         },
         {
           "id": "02",
           "title": "Döner Dürüm 🌯",
           "prices": ["7,00"],
-          "description": "Dönerfleisch eingerollt im Dürüm mit Salat",
-          "options": ["Dönerfleisch"]
+          "description": "Dönerfleisch eingerollt im Dürüm mit Salat"
         },
         {
           "id": "03",
@@ -65,14 +64,13 @@
           "id": "06",
           "title": "Pommes Tasche 🍟",
           "prices": ["5,00", "6,50"],
-          "description": "Pommes mit Sauce im Fladenbrot mit Salat"
+          "description": "Pommes mit Saucen im Fladenbrot mit Salat"
         },
         {
           "id": "07",
           "title": "King Tasche",
           "prices": ["7,00", "9,00"],
-          "description": "Dönerfleisch und Sucuk im Fladenbrot mit Salat",
-          "options": ["Dönerfleisch"]
+          "description": "Dönerfleisch und Sucuk im Fladenbrot mit Salat"
         }
       ]
     },
@@ -84,50 +82,43 @@
           "id": "10",
           "title": "Döner Teller",
           "prices": ["10,00"],
-          "description": "Dönergerichte mit Salat und Beilage",
-          "options": ["Dönerfleisch", "Beilage"]
+          "description": "Dönerfleisch mit Salat und Beilage"
         },
         {
           "id": "11",
           "title": "Döner Box",
           "prices": ["6,00", "7,00"],
-          "description": "Dönerfleisch im Box mit Pommes",
-          "options": ["Dönerfleisch"]
+          "description": "Dönerfleisch im Box mit Pommes"
         },
         {
           "id": "12",
           "title": "Döner Schale",
           "prices": ["7,50", "10,00"],
-          "description": "Dönerfleisch ohne alles",
-          "options": ["Dönerfleisch"]
+          "description": "Dönerfleisch ohne alles"
         },
         {
           "id": "13",
           "title": "Taxi Teller",
           "prices": ["11,00"],
-          "description": "Dönerfleisch mit Bratwurst, Salat und Beilage",
-          "options": ["Dönerfleisch", "Beilage"]
+          "description": "Dönerfleisch mit Bratwurst, Salat und Beilage"
         },
         {
           "id": "14",
           "title": "Sucuk Teller",
           "prices": ["10,00"],
-          "description": "türk. Knoblauchwurst mit Salat und Beilage",
-          "options": ["Beilage"]
+          "description": "türk. Knoblauchwurst mit Salat und Beilage"
         },
         {
           "id": "15",
           "title": "Döner Überbacken",
           "prices": ["11,00"],
-          "description": "Döner überbacken mit Goudakäse",
-          "options": ["Dönerfleisch"]
+          "description": "Dönerfleisch überbacken mit Goudakäse"
         },
         {
           "id": "16",
           "title": "Döner Hollandaise",
           "prices": ["12,00"],
-          "description": "Döner überbacken mit Gouda & Sauce Hollandaise",
-          "options": ["Dönerfleisch"]
+          "description": "Dönerfleisch überbacken mit Gouda & Sauce Hollandaise"
         }
       ]
     },
@@ -145,13 +136,13 @@
           "id": "22",
           "title": "Nuggets",
           "prices": ["5,00"],
-          "description": "6 Stück mit Sauce"
+          "description": "6 Stück mit Saucen"
         },
         {
           "id": "23",
           "title": "Nuggets Box",
           "prices": ["7,00"],
-          "description": "6 Stück mit Pommes und Sauce"
+          "description": "6 Stück mit Pommes und Saucen"
         },
         {
           "id": "24",
@@ -214,8 +205,7 @@
           "id": "33",
           "title": "Döner Salat",
           "prices": ["5,50", "7,50"],
-          "description": "Gemischter Salat mit Dönerfleisch",
-          "options": ["Dönerfleisch"]
+          "description": "Gemischter Salat mit Dönerfleisch"
         }
       ]
     },
@@ -401,7 +391,11 @@
         { "id": "72", "title": "Tonno", "prices": ["6,50"] },
         { "id": "73", "title": "Spinaci", "prices": ["6,50"] },
         { "id": "74", "title": "Funghi", "prices": ["6,50"] },
-        { "id": "75", "title": "Döner", "prices": ["6,50"] },
+        {
+          "id": "75",
+          "title": "Döner",
+          "prices": ["6,50"]
+        },
         { "id": "76", "title": "Salami", "prices": ["6,50"] },
         { "id": "77", "title": "Schinken", "prices": ["6,50"] },
         { "id": "78", "title": "Sucuk", "prices": ["6,50"] }

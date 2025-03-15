@@ -3,7 +3,7 @@ import Header from "~/components/Menu/Header";
 import Item from "~/components/Menu/Item";
 import Pizzablech from "~/components/SpecialOffers/Pizzablech";
 
-import { dishes as MENU } from "~/data/menu.json";
+import { dishes as MENU, options as OverallOptions } from "~/data/menu.json";
 
 export default function () {
   return (
@@ -23,19 +23,28 @@ export default function () {
               />
             }
           >
-            {menu.items.map((item, j) => (
-              <Item
-                key={`Item-${i}-${j}`}
-                id={item.id}
-                title={item.title}
-                prices={item.prices}
-                description={
-                  "description" in item ? item.description : undefined
-                }
-                note={"note" in item ? item.note : undefined}
-                options={"options" in item ? item.options : undefined}
-              />
-            ))}
+            {menu.items.map((item, j) => {
+              const description = "description" in item ? item.description : "";
+              const options: string[] =
+                "options" in item ? (item.options as Array<string>) : [];
+              options?.push(
+                ...Object.keys(OverallOptions).filter((option) =>
+                  description?.includes(option),
+                ),
+              );
+
+              return (
+                <Item
+                  key={`Item-${i}-${j}`}
+                  id={item.id}
+                  title={item.title}
+                  prices={item.prices}
+                  description={description}
+                  note={"note" in item ? item.note : undefined}
+                  options={options}
+                />
+              );
+            })}
           </List>
           {title.split(" ").some((word) => word === "Pizza") && (
             <Pizzablech key={i} />
