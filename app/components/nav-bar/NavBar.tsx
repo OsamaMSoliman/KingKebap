@@ -24,8 +24,9 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Cart Icon (Always Visible) */}
-        <div className="flex items-center space-x-4">
+        {/* Added relative positioning */}
+        <div className="relative flex items-center space-x-4">
+          {/* Cart Icon (Always Visible) */}
           <a
             onClick={toggle}
             className="flex items-center text-gray-300 hover:text-white"
@@ -33,6 +34,12 @@ export default function Navbar() {
             <ShoppingCart className="mr-1 h-5 w-5" />
             <span className="hidden md:inline">Cart</span>
           </a>
+
+          {/* Notification */}
+          <span className="absolute top-0 right-0 flex size-3">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-200 opacity-75"></span>
+            <span className="relative inline-flex size-3 rounded-full bg-yellow-300"></span>
+          </span>
         </div>
 
         {/* Desktop Navigation Links */}
