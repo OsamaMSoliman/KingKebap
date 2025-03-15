@@ -20,9 +20,9 @@ export default function AppLayout() {
       {/* Scrollable Main Content */}
       <main className="overflow-y-auto">
         {/* <main className="mx-auto w-[80vw] max-w-[960px] min-w-[400px]"> */}
-        <ScrollArea className="h-full">
-          <Outlet />
-        </ScrollArea>
+        {/* TODO: <ScrollArea className="h-full"> */}
+        <Outlet />
+        {/* </ScrollArea> */}
         {/* <FAB /> */}
         <Cart />
       </main>

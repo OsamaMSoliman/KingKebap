@@ -1,9 +1,9 @@
 import List from "~/components/Menu/List";
 import Header from "~/components/Menu/Header";
 import Item from "~/components/Menu/Item";
-
-import MENU from "~/data/menu.json";
 import Pizzablech from "~/components/SpecialOffers/Pizzablech";
+
+import { dishes as MENU } from "~/data/menu.json";
 
 export default function () {
   return (

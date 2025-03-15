@@ -13,6 +13,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
+      {/* TODO: show the offer of the day on top, maybe in the navbar ?*/}
       <ComboMeals />
       <Menu />
       <Offers />
