@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
+import { Toaster } from "sonner";
 import AboutUs from "~/components/about-us/AboutUs";
 import FAB from "~/components/floating-action-button/FAB";
 import Navbar from "~/components/nav-bar/NavBar";
@@ -25,6 +26,7 @@ export default function AppLayout() {
         {/* </ScrollArea> */}
         {/* <FAB /> */}
         <SidePanel />
+        <Toaster />
       </main>
       {/* Footer */}
       <footer

@@ -16,6 +16,8 @@ import { Checkbox } from "~/components/ui/checkbox";
 import { Textarea } from "~/components/ui/textarea";
 import { ToggleGroup, ToggleItem } from "~/components/toggle-group/ToggleGroup";
 import { ShoppingCart } from "lucide-react";
+import { toast } from "sonner";
+import { useCartStore } from "~/stores/CartStore";
 
 interface IProps {
   id: string;
@@ -36,17 +38,50 @@ export default function ({
 }: IProps) {
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
+  const { addItem } = useCartStore();
+
+  // const handleAddItem = () => {
+  //   toast.promise(
+  //     new Promise<string>((resolve) => {
+  //       setTimeout(() => {
+  //         addItem({
+  //           id,
+  //           name: title,
+  //           price: selectedPrice!,
+  //           options: [],
+  //           quantity: 1,
+  //         });
+  //         // toast.success("Added to Cart");
+  //         resolve(title);
+  //       }, 2000);
+  //     }),
+  //     {
+  //       loading: "Adding to Cart...",
+  //       action: {
+  //         label: "Undo",
+  //         onClick: () => console.log("TODO: Undo"),
+  //       },
+  //       success: (data) => {
+  //         return `${data} has been added`;
+  //       },
+  //       error: "Error",
+  //     },
+  //   );
+  // };
+
   return (
     <div className="w-fill flex items-center">
       <p className="m-1 border-y-2 font-bold slashed-zero tabular-nums">
         {`${id}.`}
       </p>
+
       <div className="grow">
         <div className="flex items-center gap-2">
           <div className="mr-auto flex gap-1">
             <p className="text-lg">{title}</p>
             {note && <p className="text-xs text-gray-500">{note}</p>}
           </div>
+
           <Dialog>
             {prices.map((price, i) => (
               <DialogTrigger asChild key={i} value={price}>
@@ -61,6 +96,7 @@ export default function ({
                 </Button>
               </DialogTrigger>
             ))}
+
             <DialogContent className="text-black">
               <DialogHeader>
                 <DialogTitle>Auswahlmöglichkeiten:</DialogTitle>
@@ -68,6 +104,7 @@ export default function ({
                   Der Preis bleibt {selectedPrice} und wird nicht beeinflusst
                 </DialogDescription>
               </DialogHeader>
+
               <div className="w-full">
                 {Object.values(options).map((option, i) => {
                   const optionValues =
@@ -119,15 +156,38 @@ export default function ({
                 })}
                 <Textarea placeholder="Anmerkungen zur Bestellung" />
               </div>
+
               <DialogFooter>
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">
                     Abbrechen
                   </Button>
                 </DialogClose>
-                <Button type="submit">
-                  Zum <ShoppingCart className="mr-1 h-5 w-5" /> hinzufügen
-                </Button>
+
+                <DialogClose asChild>
+                  <Button
+                    // type="submit"
+                    // onClick={handleAddItem}
+                    onClick={() => {
+                      addItem({
+                        id,
+                        name: title,
+                        price: selectedPrice!,
+                        options: [],
+                        quantity: 1,
+                      });
+                      toast.success(
+                        `${title} wurde hinzugefügt`,
+                        // { action: {
+                        //   label: "Undo",
+                        //   onClick: () => console.log("TODO: Undo"),
+                        // }}
+                      );
+                    }}
+                  >
+                    Zum <ShoppingCart className="mr-1 h-5 w-5" /> hinzufügen
+                  </Button>
+                </DialogClose>
               </DialogFooter>
             </DialogContent>
           </Dialog>

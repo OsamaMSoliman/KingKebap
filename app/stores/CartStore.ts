@@ -1,20 +1,29 @@
 import { create } from "zustand";
 
+export interface ICartItem {
+  cartId: number;
+  id: string;
+  name: string;
+  price: string;
+  quantity: number;
+  options?: Array<string>;
+  note?: string;
+}
+
 interface CartStore {
-  show: boolean;
-  toggle: () => void;
-  itemIDs: string[];
-  addItemId: (item: string) => void;
-  removeItemId: (item: string) => void;
+  items: ICartItem[];
+  addItem: (item: Omit<ICartItem, "cartId">) => void;
+  removeItem: (item: ICartItem) => void;
 }
 
 export const useCartStore = create<CartStore>((set) => ({
-  show: false,
-  toggle: () => set((state) => ({ show: !state.show })),
-  itemIDs: [],
-  addItemId: (item) => set((state) => ({ itemIDs: [...state.itemIDs, item] })),
-  removeItemId: (item) =>
+  items: [],
+  addItem: (item) =>
     set((state) => ({
-      itemIDs: state.itemIDs.filter((id) => id !== item),
+      items: [...state.items, { ...item, cartId: state.items.length }],
+    })),
+  removeItem: (item) =>
+    set((state) => ({
+      items: state.items.filter((i) => i.cartId !== item.cartId),
     })),
 }));
