@@ -5,6 +5,7 @@ interface IProps {
 }
 
 export default function AboutUs({ isOpen = false }: IProps) {
+  // TODO: Hinweis: Wir haben gerade geschlossen. Wenn Sie möchten, können Sie aber jetzt schon bestellen, wir liefern dann zu unseren Geschäftszeiten.
   return isOpen ? (
     <div className="space-y-2">
       <p>Über uns</p>
