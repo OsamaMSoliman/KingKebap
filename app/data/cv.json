@@ -1,0 +1,68 @@
+{
+  "Experiences": {
+    "Fraunhofer IAIS": {
+      "position": "Research Assistant",
+      "duration": "Apr 2022 - Present",
+      "location": "Sankt Augustin, Germany",
+      "projects": [
+        {
+          "title": "LLM-HUB",
+          "descriptions": [
+            "Decouple UI into standalone React app for modularity and scalability",
+            "Description 2 of project1"
+          ],
+          "tags": ["tag1", "tag2"]
+        },
+        {
+          "title": "Translation-Check",
+          "descriptions": ["Implemented React components for an AI translation checker"],
+          "tags": ["tag1", "tag2"]
+        },
+        {
+          "title": "ML-gym",
+          "descriptions": ["Visualize a deep ML framework data in a React web app"],
+          "tags": ["tag1", "tag2"]
+        },
+        {
+          "title": "Hemangioma",
+          "descriptions": ["Created an anonymity-focused image manipulation tool in Unity"],
+          "tags": ["tag1", "tag2"]
+        }
+      ]
+    },
+    "Armed Forces Hospital": {
+      "position": "Full Stack Developer",
+      "duration": "Apr 2019 - Jun 2020",
+      "location": "Alexandria, Egypt",
+      "projects": [
+        {
+          "title": "ERP System Overhaul",
+          "descriptions": [
+            "Revitalized the ERP system's user interface, resulting in streamlined workflows and enhanced user satisfaction.",
+            "Architected a robust RESTful server to facilitate seamless communication between the UI and backend database systems.",
+            "Led database optimization initiatives—including cleaning and migration strategies—to significantly improve system performance",
+            "Developed a new patient management system that reduced the time required to manage patient records by 30%.",
+            "Collaborated with a team of 5 developers to design and implement a new inventory management system, resulting in a 20% reduction in inventory costs."
+          ],
+          "tags": ["tag1", "tag2"]
+        }
+      ]
+    }
+  },
+  "Education": {
+    "Institute for Computer Science, Bonn University": {
+      "degree": "M.Sc. in Computer Science",
+      "duration": "Oct 2020 -- Sep 2024",
+      "location": "Bonn, Germany",
+      "project": "graduation thesis: bla bla bla"
+    },
+    "Faculty of Engineering, Alexandria University": {
+      "degree": "B.Sc. in Computer Engineering",
+      "duration": "Oct 2013 -- Jun 2018",
+      "location": "Alexandria, Egypt",
+      "project": "graduation project: bla bla bla"
+    }
+  },
+  "Skills": {},
+  "Projects": {}
+}

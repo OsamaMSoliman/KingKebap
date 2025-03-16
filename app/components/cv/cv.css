@@ -1,0 +1,28 @@
+@page {
+    size: A4 portrait !important;
+    margin: 20mm;
+    padding: 10px;
+}
+
+body {
+    width: 210mm; /* A4 width */
+    height: 297mm; /* A4 height */
+    margin: 0 auto; /* Center the page */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    /* border: 1px solid #ddd; */
+    /* background-color: rgb(122, 110, 110); */
+}
+
+
+ul > li{
+    list-style-type: '» ';
+    padding-inline-start: 1rem;
+
+    /* &::marker {
+        content: "» ";
+        color: #007bff;
+        font-weight: bold;
+    } */
+}
