@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "~/components/ui/button";
 
 export default function UserInfo() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ export default function UserInfo() {
   };
 
   return (
-    <div className="mx-auto max-w-md rounded-lg bg-white p-3 shadow-md">
+    <div className="mx-auto max-w-md bg-white p-3">
       <h2 className="mb-6 text-center text-2xl font-bold">Kontaktformular</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -108,12 +109,9 @@ export default function UserInfo() {
           />
         </div>
         <div className="flex justify-center">
-          <button
-            type="submit"
-            className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
-          >
-            Absenden
-          </button>
+          <Button type="submit" variant="secondary" className="w-2/3 outline-double">
+            Weiter
+          </Button>
         </div>
       </form>
     </div>
