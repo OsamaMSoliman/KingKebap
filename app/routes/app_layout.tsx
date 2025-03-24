@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Outlet } from "react-router";
 import { Toaster } from "sonner";
 import AboutUs from "~/components/about-us/AboutUs";
-import FAB from "~/components/floating-action-button/FAB";
+// import FAB from "~/components/floating-action-button/FAB";
 import Navbar from "~/components/nav-bar/NavBar";
 import SidePanel from "~/components/side-panel/SidePanel";
-import { ScrollArea } from "~/components/ui/scroll-area";
+// import { ScrollArea } from "~/components/ui/scroll-area";
 
 export default function AppLayout() {
   const [isCollapsed, setIsCollapsed] = useState(true);

@@ -10,6 +10,17 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const today = new Date();
+
 function isMondayOrTuesday() {
   const today = new Date(); // Get the current date
   // console.log(
@@ -31,6 +42,7 @@ export default function Home() {
   return (
     <>
       <div>
+        <h1>Welcome, today is {days[today.getDay()]}!</h1>
         {isMonday ? <p>Today is Monday!</p> : <p>Today is not Monday.</p>}
         {isTuesday ? <p>Today is Tuesday!</p> : <p>Today is not Tuesday.</p>}
       </div>
