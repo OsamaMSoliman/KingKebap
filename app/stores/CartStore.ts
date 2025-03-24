@@ -1,29 +1,72 @@
 import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
 export interface ICartItem {
-  cartId: number;
+  cartId: string;
   id: string;
   name: string;
   price: string;
   quantity: number;
-  options?: Array<string>;
+  options?: Record<string, string>;
   note?: string;
 }
 
-interface CartStore {
-  items: ICartItem[];
-  addItem: (item: Omit<ICartItem, "cartId">) => void;
-  removeItem: (item: ICartItem) => void;
-}
+// store
+const initialState = {
+  _ids: [] as string[],
+  _items: {} as Record<string, ICartItem>
+};
 
-export const useCartStore = create<CartStore>((set) => ({
-  items: [],
-  addItem: (item) =>
-    set((state) => ({
-      items: [...state.items, { ...item, cartId: state.items.length }],
-    })),
-  removeItem: (item) =>
-    set((state) => ({
-      items: state.items.filter((i) => i.cartId !== item.cartId),
-    })),
+const useCartStore = create<typeof initialState>()(devtools(() => initialState));
+
+// selectors
+export const selectAllIds = (): typeof initialState._ids => useCartStore((state) => state._ids);
+export const selectItem = (cartId: string): ICartItem | undefined => useCartStore((state) => state._items[cartId]);
+
+// actions
+export const setReset = (): void => useCartStore.setState(initialState);
+export const setIncrementItem = (cartId: string): void => useCartStore.setState((state) => {
+  const item = state._items[cartId];
+  return ({
+    ...state,
+    _items: {
+      ...state._items,
+      [cartId]: {
+        ...item,
+        quantity: item.quantity + 1
+      }
+    }
+  });
+});
+export const setAddItem = (item: Omit<ICartItem, "cartId">): void => {
+  const { quantity, ...rest } = item;
+  const cartId = Object.values(rest).join("-");
+  console.log({ quantity, cartId });
+  if (useCartStore.getState()._ids.includes(cartId)) {
+    return setIncrementItem(cartId);
+  }
+  useCartStore.setState((state) => ({
+    _ids: [...state._ids, cartId],
+    _items: { ...state._items, [cartId]: { ...item, cartId: cartId } }
+  }));
+};
+export const setDecrementItem = (cartId: string): void => {
+  const item = useCartStore.getState()._items[cartId];
+  if (item && item.quantity > 1)
+    useCartStore.setState((state) => ({
+      ...state,
+      _items: {
+        ...state._items,
+        [cartId]: {
+          ...item,
+          quantity: item.quantity - 1
+        }
+      }
+    }));
+  else setRemoveItemByCartId(cartId);
+
+};
+export const setRemoveItemByCartId = (cartId: string): void => useCartStore.setState((state) => ({
+  _ids: state._ids.filter((id) => id !== cartId),
+  _items: Object.fromEntries(Object.entries(state._items).filter(([key]) => key !== cartId))
 }));

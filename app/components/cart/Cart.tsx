@@ -1,22 +1,30 @@
-import { useCartStore } from "~/stores/CartStore";
-import { Button } from "~/components/ui/button";
+import { selectAllIds } from "~/stores/CartStore";
+import CartItem from "../cart-item/CartItem";
 
 interface IProps {}
 
 export default function Cart({}: IProps) {
-  const { items, removeItem } = useCartStore();
+  const allItemIds = selectAllIds();
+
   return (
     <div className="flex flex-col space-y-2">
-      {items.map((item) => (
-        <div key={item.cartId} className="flex items-center justify-between">
-          <span>{item.name}</span>
-          <span className="text-sm text-gray-500">
-            {item.options?.join(", ")}
-          </span>
-          <span>{item.quantity}</span>
-          <Button onClick={() => removeItem(item)}>Remove</Button>
-        </div>
-      ))}
+      {allItemIds.length === 0 ? (
+        <div>Your cart is empty</div>
+      ) : (
+        allItemIds.map((id, index) => (
+          <CartItem
+            key={`${id}-${index}`}
+            cartId={id}
+            // item={{
+            //   cartId: index + 1,
+            //   id: `${index + 1}`,
+            //   name: `Item ${index + 1}`,
+            //   price: `${(index + 1) * 10}`,
+            //   quantity: 1,
+            // }}
+          />
+        ))
+      )}
     </div>
   );
 }

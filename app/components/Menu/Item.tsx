@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { options as OverallOptions } from "~/data/menu.json";
 
+import { DialogClose } from "@radix-ui/react-dialog";
+import { ShoppingCart } from "lucide-react";
+import { toast } from "sonner";
+import { ToggleGroup, ToggleItem } from "~/components/toggle-group/ToggleGroup";
 import { Button } from "~/components/ui/button";
+import { Checkbox } from "~/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -11,13 +16,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "~/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { Checkbox } from "~/components/ui/checkbox";
 import { Textarea } from "~/components/ui/textarea";
-import { ToggleGroup, ToggleItem } from "~/components/toggle-group/ToggleGroup";
-import { ShoppingCart } from "lucide-react";
-import { toast } from "sonner";
-import { useCartStore } from "~/stores/CartStore";
+import { setAddItem } from "~/stores/CartStore";
 
 interface IProps {
   id: string;
@@ -37,8 +37,10 @@ export default function ({
   options = [],
 }: IProps) {
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
-
-  const { addItem } = useCartStore();
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: string]: string | string[];
+  }>({});
+  const [comment, setComment] = useState<string>("");
 
   // const handleAddItem = () => {
   //   toast.promise(
@@ -111,9 +113,16 @@ export default function ({
                     OverallOptions[option as keyof typeof OverallOptions];
                   const isMultiple = false; // values.length > 1;
 
-                  const [value, setValue] = useState<string | string[]>(
-                    isMultiple ? [optionValues[0]] : optionValues[0],
-                  );
+                  const value =
+                    selectedOptions[option] ||
+                    (isMultiple ? [optionValues[0]] : optionValues[0]);
+
+                  if (!selectedOptions[option]) {
+                    setSelectedOptions((prev) => ({
+                      ...prev,
+                      [option]: value,
+                    }));
+                  }
 
                   if (
                     optionValues[0] === "true" ||
@@ -121,7 +130,16 @@ export default function ({
                   ) {
                     return (
                       <div key={i} className="mb-8 flex items-center space-x-2">
-                        <Checkbox id={option} defaultChecked />
+                        <Checkbox
+                          id={option}
+                          checked={value.toString().toLowerCase() === "true"}
+                          onCheckedChange={(checked) =>
+                            setSelectedOptions((prev) => ({
+                              ...prev,
+                              [option]: checked ? "true" : "false",
+                            }))
+                          }
+                        />
                         <label
                           htmlFor={option}
                           className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -137,7 +155,12 @@ export default function ({
                       <p className="mb-2 font-semibold">{option}:</p>
                       <ToggleGroup
                         value={value}
-                        onValueChange={setValue}
+                        onValueChange={(newValue) =>
+                          setSelectedOptions((prev) => ({
+                            ...prev,
+                            [option]: newValue as string | string[],
+                          }))
+                        }
                         multiple={isMultiple}
                         className="h-auto w-full flex-wrap gap-x-3 gap-y-1"
                       >
@@ -154,7 +177,11 @@ export default function ({
                     </div>
                   );
                 })}
-                <Textarea placeholder="Anmerkungen zur Bestellung" />
+                <Textarea
+                  placeholder="Anmerkungen zur Bestellung"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
               </div>
 
               <DialogFooter>
@@ -169,12 +196,18 @@ export default function ({
                     // type="submit"
                     // onClick={handleAddItem}
                     onClick={() => {
-                      addItem({
+                      setAddItem({
                         id,
                         name: title,
                         price: selectedPrice!,
-                        options: [],
+                        options: Object.fromEntries(
+                          Object.entries(selectedOptions).map(([k, v]) => [
+                            k,
+                            Array.isArray(v) ? v.join(", ") : v,
+                          ]),
+                        ),
                         quantity: 1,
+                        note: comment,
                       });
                       toast.success(
                         `${title} wurde hinzugefügt`,
