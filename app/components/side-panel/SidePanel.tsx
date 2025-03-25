@@ -1,32 +1,53 @@
+import { useMemo, useState } from 'react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "~/components/ui/accordion";
+} from '~/components/ui/accordion';
+import { Button } from '~/components/ui/button';
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
-} from "~/components/ui/sheet";
-import { Button } from "~/components/ui/button";
-import { useSidePanelStore } from "~/stores/SidePanelStore";
-import Cart from "../cart/Cart";
-import UserInfo from "../user-info/UserInfo";
+} from '~/components/ui/sheet';
+import { useContactStore } from '~/stores/ContactStore';
+import { useSidePanelStore } from '~/stores/SidePanelStore';
+import Cart from '../cart/Cart';
+import UserInfo from '../user-info/UserInfo';
 
 interface IProps {}
+
+type AccordionValue = 'user-info' | 'user-cart';
 
 export default function SidePanel({}: IProps) {
   const show = useSidePanelStore((state) => state.show);
   const toggle = useSidePanelStore((state) => state.toggle);
 
+  const contactInfo = useContactStore();
+  const defaultAccordion = useMemo(
+    () =>
+      Object.entries(contactInfo)
+        .filter(([key, _]) => key !== 'bemerkungen') // all required excluding bemerkungen
+        .some(([_, info]) => info === '') // if any of the required is empty
+        ? 'user-info'
+        : 'user-cart',
+    [contactInfo]
+  );
+  const [accordionValue, setAccordionValue] =
+    useState<AccordionValue>(defaultAccordion);
+
+  const handleToggle = (open: boolean): void => {
+    toggle();
+    setAccordionValue(defaultAccordion);
+  };
+
   return (
-    <Sheet open={show} onOpenChange={toggle}>
-      <SheetContent>
+    <Sheet open={show} onOpenChange={handleToggle}>
+      <SheetContent aria-describedby={undefined}>
         <SheetHeader>
           <SheetTitle>Zur Kasse</SheetTitle>
           {/* <SheetDescription>
@@ -35,7 +56,12 @@ export default function SidePanel({}: IProps) {
         </SheetHeader>
 
         <div className="h-full overflow-y-auto px-4 text-black">
-          <Accordion type="single" className="w-full" defaultValue="user-info">
+          <Accordion
+            type="single"
+            className="w-full"
+            value={accordionValue}
+            onValueChange={(value: AccordionValue) => setAccordionValue(value)}
+          >
             <AccordionItem value="user-info">
               <AccordionTrigger>Kontaktformular</AccordionTrigger>
               <AccordionContent>

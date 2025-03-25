@@ -1,36 +1,35 @@
-import List from "~/components/Menu/List";
-import Header from "~/components/Menu/Header";
-import Item from "~/components/Menu/Item";
-import Pizzablech from "~/components/SpecialOffers/Pizzablech";
+import Header from '~/components/Menu/Header';
+import Item from '~/components/Menu/Item';
+import List from '~/components/Menu/List';
+import Pizzablech from '~/components/SpecialOffers/Pizzablech';
 
-import { dishes as MENU, options as OverallOptions } from "~/data/menu.json";
+import { dishes as MENU, options as OverallOptions } from '~/data/menu.json';
 
 export default function () {
   return (
     <>
       <p className="my-4 text-center text-6xl font-extrabold">Speisekarte</p>
       {Object.entries(MENU).map(([title, menu], i) => (
-        <>
+        <div key={`Menu-${i}`}>
           <List
-            key={`List-${i}`}
             header={
               <Header
                 title={title}
                 description={
-                  "description" in menu ? menu.description : undefined
+                  'description' in menu ? menu.description : undefined
                 }
-                note={"note" in menu ? menu.note : undefined}
+                note={'note' in menu ? menu.note : undefined}
               />
             }
           >
             {menu.items.map((item, j) => {
-              const description = "description" in item ? item.description : "";
+              const description = 'description' in item ? item.description : '';
               const options: string[] =
-                "options" in item ? (item.options as Array<string>) : [];
+                'options' in item ? (item.options as Array<string>) : [];
               options?.push(
                 ...Object.keys(OverallOptions).filter((option) =>
-                  description?.includes(option),
-                ),
+                  description?.includes(option)
+                )
               );
 
               return (
@@ -40,16 +39,14 @@ export default function () {
                   title={item.title}
                   prices={item.prices}
                   description={description}
-                  note={"note" in item ? item.note : undefined}
+                  note={'note' in item ? item.note : undefined}
                   options={options}
                 />
               );
             })}
           </List>
-          {title.split(" ").some((word) => word === "Pizza") && (
-            <Pizzablech key={i} />
-          )}
-        </>
+          {title.split(' ').some((word) => word === 'Pizza') && <Pizzablech />}
+        </div>
       ))}
     </>
   );

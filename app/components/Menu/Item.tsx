@@ -178,6 +178,7 @@ export default function ({
                   );
                 })}
                 <Textarea
+                  name="comment"
                   placeholder="Anmerkungen zur Bestellung"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
