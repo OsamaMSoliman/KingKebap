@@ -10,7 +10,9 @@ const initialState = {
   bemerkungen: '',
 };
 
-export const useContactStore = create<typeof initialState>()(
+export type ContactInfo = typeof initialState;
+
+export const useContactStore = create<ContactInfo>()(
   persist(() => initialState, { name: 'contact-info' })
 );
 

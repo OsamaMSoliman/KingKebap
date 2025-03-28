@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useFetcher } from 'react-router';
+import { toast } from 'sonner';
 import {
   Accordion,
   AccordionContent,
@@ -14,6 +16,8 @@ import {
   SheetHeader,
   SheetTitle,
 } from '~/components/ui/sheet';
+import { action as checkoutAction } from '~/routes/checkout';
+import { getAllItems } from '~/stores/CartStore';
 import { useContactStore } from '~/stores/ContactStore';
 import { useSidePanelStore } from '~/stores/SidePanelStore';
 import Cart from '../cart/Cart';
@@ -45,14 +49,56 @@ export default function SidePanel({}: IProps) {
     setAccordionValue(defaultAccordion);
   };
 
+  const {
+    data: receivedData,
+    formData: sentData,
+    submit,
+    state, // TODO: prevent the user from submitting multiple times
+  } = useFetcher<typeof checkoutAction>();
+
+  useEffect(() => {
+    if (receivedData?.ok) {
+      console.log({ receivedData });
+      toast.success('Bestellung wurde erfolgreich abgeschickt', {
+        action: {
+          label: 'Undo',
+          onClick: () => console.log('TODO: Undo'),
+        },
+      });
+    } else {
+      // TODO: state why?
+      toast.error('Bestellung konnte nicht abgeschickt werden', {
+        action: {
+          label: 'Undo',
+          onClick: () => console.log('TODO: Undo'),
+        },
+      });
+    }
+  }, [receivedData]);
+
+  const onClick = async () =>
+    await submit(
+      {
+        ...contactInfo,
+        items: getAllItems(),
+      },
+      {
+        method: 'POST',
+        action: '/api/checkout',
+        encType: 'application/json',
+      }
+    );
+
   return (
     <Sheet open={show} onOpenChange={handleToggle}>
       <SheetContent aria-describedby={undefined}>
         <SheetHeader>
           <SheetTitle>Zur Kasse</SheetTitle>
-          {/* <SheetDescription>
+          {/* 
+          <SheetDescription>
             add address and some other user information then checkout
-          </SheetDescription> */}
+          </SheetDescription>
+          */}
         </SheetHeader>
 
         <div className="h-full overflow-y-auto px-4 text-black">
@@ -79,7 +125,9 @@ export default function SidePanel({}: IProps) {
 
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit">Jetzt Bestellen</Button>
+            <Button type="submit" onClick={onClick}>
+              Jetzt Bestellen
+            </Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
