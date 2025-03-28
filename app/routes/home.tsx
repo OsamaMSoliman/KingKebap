@@ -1,27 +1,16 @@
-import type { Route } from "./+types/home";
-import Menu from "./menu";
-import Offers from "./offers";
-import ComboMeals from "./combo-meals";
+import type { Route } from './+types/home';
+import ComboMeals from './combo-meals';
+import Menu from './menu';
+import Offers from './offers';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: 'New React Router App' },
+    { name: 'description', content: 'Welcome to React Router!' },
   ];
 }
 
-const days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-const today = new Date();
-
-function isMondayOrTuesday() {
+export async function loader({ params }: Route.LoaderArgs) {
   const today = new Date(); // Get the current date
   // console.log(
   //   today,
@@ -33,16 +22,29 @@ function isMondayOrTuesday() {
   return {
     isMonday: today.getDay() === 1, //  (1 corresponds to Monday)
     isTuesday: today.getDay() === 4, //  (1 corresponds to Teusday)
+    today: [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ][today.getDay()],
   };
 }
 
-export default function Home() {
-  const { isMonday, isTuesday } = isMondayOrTuesday();
+export function HydrateFallback() {
+  return <p>Loading ...</p>;
+}
+
+export default function Home({ loaderData }: Route.ComponentProps) {
+  const { today, isMonday, isTuesday } = loaderData;
 
   return (
     <>
       <div>
-        <h1>Welcome, today is {days[today.getDay()]}!</h1>
+        <h1>Welcome, today is {today}!</h1>
         {isMonday ? <p>Today is Monday!</p> : <p>Today is not Monday.</p>}
         {isTuesday ? <p>Today is Tuesday!</p> : <p>Today is not Tuesday.</p>}
       </div>

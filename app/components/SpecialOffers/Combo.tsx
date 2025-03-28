@@ -19,7 +19,7 @@ export default function Combo({
     <div className="m-4 flex">
       <p
         className="bg-white px-1 py-2 text-center text-red-500"
-        style={{ writingMode: "sideways-lr" }}
+        style={{ writingMode: "vertical-lr" }}
       >
         Menü-{id}
       </p>
