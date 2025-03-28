@@ -1,33 +1,20 @@
-import nodemailer from 'nodemailer';
 import type { ActionFunctionArgs } from 'react-router';
 import { Form, useActionData } from 'react-router';
-
-// Configure your email transporter
-const transporter = nodemailer.createTransport({
-  // service: 'gmail', // or your email service
-  host: 'smtp.gmail.com',
-  port: 587, //465,
-  authMethod: 'PLAIN',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+import { transporter } from '~/.server/transporter';
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
-  const { name, email, message } = Object.fromEntries(formData);
+  const { name, message } = Object.fromEntries(formData);
 
   try {
     await transporter.sendMail({
-      from: `"Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.RECEIVING_EMAIL,
+      from: `"Contact Form" <${process.env.EMAIL}>`,
+      to: process.env.EMAIL,
       subject: `New message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      text: `Name: ${name}\nMessage: ${message}`,
       html: `
         <h1>New Contact Form Submission</h1>
         <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong> ${message}</p>
       `,
     });
@@ -40,7 +27,8 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function ContactPage() {
-  const actionData = useActionData<typeof action>();
+  // const actionData = useActionData<typeof action>();
+  const actionData = useActionData();
 
   console.log(actionData);
 
