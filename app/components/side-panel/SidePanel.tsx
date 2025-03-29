@@ -16,7 +16,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from '~/components/ui/sheet';
-import { action as checkoutAction } from '~/routes/checkout';
+import type { action as checkoutAction } from '~/routes/checkout';
 import { getAllItems } from '~/stores/CartStore';
 import { useContactStore } from '~/stores/ContactStore';
 import { useSidePanelStore } from '~/stores/SidePanelStore';
