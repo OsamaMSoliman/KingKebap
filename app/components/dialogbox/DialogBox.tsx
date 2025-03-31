@@ -25,8 +25,8 @@ interface IProps {
   quantity?: number;
 }
 
-// This confirmation dialog is used to confirm the options selected per item (every item has its own ConfirmationDialog)
-export default function ConfirmationDialog({
+// This dialog box is used to confirm the options selected per item (every item has its own DialogBox)
+export default function DialogBox({
   cartId,
   id,
   title,

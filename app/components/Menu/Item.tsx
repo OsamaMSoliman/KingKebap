@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
+import DialogBox from '~/components/dialogbox/DialogBox';
 import { Dialog } from '~/components/ui/dialog';
-import ConfirmationDialog from './ConfirmationDialog';
 import Prices from './Prices';
 
 interface IProps {
@@ -39,7 +39,7 @@ export default function Item({
           <Dialog>
             <Prices prices={prices} setSelectedPrice={setSelectedPrice} />
 
-            <ConfirmationDialog
+            <DialogBox
               id={id}
               title={title}
               selectedPrice={selectedPrice!}

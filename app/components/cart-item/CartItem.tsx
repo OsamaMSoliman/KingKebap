@@ -1,5 +1,5 @@
 import { Edit, Minus, Plus, Trash2 } from 'lucide-react';
-import ConfirmationDialog from '~/components/Menu/ConfirmationDialog';
+import DialogBox from '~/components/dialogbox/DialogBox';
 import { Button } from '~/components/ui/button';
 import { Checkbox } from '~/components/ui/checkbox';
 import { Dialog, DialogTrigger } from '~/components/ui/dialog';
@@ -110,7 +110,7 @@ export default function CartItem({ cartId }: IProps) {
           </div>
         </div>
       </DialogTrigger>
-      <ConfirmationDialog
+      <DialogBox
         cartId={cartId}
         id={id}
         title={name}
