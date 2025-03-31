@@ -4,21 +4,19 @@ import type { Dispatch, SetStateAction } from 'react';
 import { ToggleGroup, ToggleItem } from '~/components/toggle-group/ToggleGroup';
 import { Checkbox } from '~/components/ui/checkbox';
 
-const Options = ({
+export type TOptions = { [key: string]: string | string[] };
+
+interface IProps {
+  options: Array<string>;
+  selectedOptions: TOptions;
+  setSelectedOptions: Dispatch<SetStateAction<TOptions>>;
+}
+
+export default function Options({
   options,
   selectedOptions,
   setSelectedOptions,
-}: {
-  options: Array<string>;
-  selectedOptions: {
-    [key: string]: string | string[];
-  };
-  setSelectedOptions: Dispatch<
-    SetStateAction<{
-      [key: string]: string | string[];
-    }>
-  >;
-}) => {
+}: IProps) {
   return options.map((option, i) => {
     const optionValues = OverallOptions[option as keyof typeof OverallOptions];
     const isMultiple = false; // values.length > 1;
@@ -40,7 +38,7 @@ const Options = ({
       />
     );
   });
-};
+}
 
 const OptionRenderer = ({
   option,
@@ -91,5 +89,3 @@ const OptionRenderer = ({
     </div>
   );
 };
-
-export default Options;
