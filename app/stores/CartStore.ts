@@ -49,18 +49,32 @@ export const setIncrementItem = (cartId: string): void =>
       },
     };
   });
-export const setAddItem = (item: Omit<ICartItem, 'cartId'>): void => {
-  const { quantity, ...rest } = item;
-  const cartId = Object.values(rest).join('-');
-  console.log({ quantity, cartId });
-  if (useCartStore.getState()._ids.includes(cartId)) {
-    return setIncrementItem(cartId);
-  }
-  useCartStore.setState((state) => ({
-    _ids: [...state._ids, cartId],
-    _items: { ...state._items, [cartId]: { ...item, cartId: cartId } },
-  }));
-};
+export const setUpsertItem = (
+  item: Omit<ICartItem, 'cartId'> & { cartId?: string }
+): void =>
+  useCartStore.setState(({ _ids, _items }) => {
+    if (item.cartId && _items[item.cartId]) {
+      return {
+        _ids,
+        _items: {
+          ..._items,
+          [item.cartId]: {
+            ..._items[item.cartId],
+            ...item,
+          },
+        },
+      };
+    }
+
+    const cartId = item.cartId || Date.now().toString();
+    return {
+      _ids: item.cartId ? _ids : [..._ids, cartId],
+      _items: {
+        ..._items,
+        [cartId]: { ...item, cartId },
+      },
+    };
+  });
 export const setDecrementItem = (cartId: string): void => {
   const item = useCartStore.getState()._items[cartId];
   if (item && item.quantity > 1)
