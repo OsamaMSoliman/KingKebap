@@ -8,6 +8,7 @@ const initialState = {
   email: '',
   adresse: '',
   bemerkungen: '',
+  'wo?': 'Lieferung',
 };
 
 export type ContactInfo = typeof initialState;
@@ -26,3 +27,10 @@ export const setCompleteReset = (): void => {
   useContactStore.persist.clearStorage();
   useContactStore.setState(initialState);
 };
+export const setLieferungOderAbholung = (
+  value: 'Lieferung' | 'Abholung'
+): void =>
+  useContactStore.setState((state) => ({
+    ...state,
+    'wo?': value,
+  }));

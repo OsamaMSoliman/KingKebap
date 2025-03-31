@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useFetcher } from 'react-router';
 import { toast } from 'sonner';
+import Cart from '~/components/cart/Cart';
+import { ToggleGroup, ToggleItem } from '~/components/toggle-group/ToggleGroup';
 import {
   Accordion,
   AccordionContent,
@@ -12,16 +14,19 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
 } from '~/components/ui/sheet';
+import UserInfo from '~/components/user-info/UserInfo';
 import type { action as checkoutAction } from '~/routes/checkout';
 import { getAllItems } from '~/stores/CartStore';
-import { useContactStore } from '~/stores/ContactStore';
+import {
+  setLieferungOderAbholung,
+  useContactStore,
+} from '~/stores/ContactStore';
 import { useSidePanelStore } from '~/stores/SidePanelStore';
-import Cart from '../cart/Cart';
-import UserInfo from '../user-info/UserInfo';
 
 interface IProps {}
 
@@ -92,13 +97,19 @@ export default function SidePanel({}: IProps) {
   return (
     <Sheet open={show} onOpenChange={handleToggle}>
       <SheetContent aria-describedby={undefined}>
-        <SheetHeader>
+        <SheetHeader className="pb-0">
           <SheetTitle>Zur Kasse</SheetTitle>
-          {/* 
+
           <SheetDescription>
-            add address and some other user information then checkout
+            <ToggleGroup
+              className="w-full border border-gray-300"
+              value={contactInfo['wo?'] as 'Lieferung' | 'Abholung'}
+              onValueChange={setLieferungOderAbholung}
+            >
+              <ToggleItem value="Lieferung">Lieferung</ToggleItem>
+              <ToggleItem value="Abholung">Abholung</ToggleItem>
+            </ToggleGroup>
           </SheetDescription>
-          */}
         </SheetHeader>
 
         <div className="h-full overflow-y-auto px-4 text-black">

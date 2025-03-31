@@ -105,14 +105,6 @@ function ToggleItem({
 
 export { ToggleGroup, ToggleItem, type ToggleType };
 
-// const DefaultToggleGroup: React.FC<Omit<ToggleGroupProps<string | string[]>, 'value' | 'onValueChange'> & {
-//   value: string | string[];
-//   onValueChange: React.Dispatch<React.SetStateAction<string | string[]>>;
-// }> = (props) => {
-//   return <ToggleGroup<string | string[]> {...props} />;
-// };
-
-// export { DefaultToggleGroup };
 import { Button } from '../ui/button';
 
 export default function ToggleTesting() {
