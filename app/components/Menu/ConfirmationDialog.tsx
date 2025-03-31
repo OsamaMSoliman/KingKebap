@@ -22,6 +22,7 @@ interface IProps {
   title: string;
   selectedPrice: string;
   options: Array<string>;
+  quantity?: number;
 }
 
 // This confirmation dialog is used to confirm the options selected per item (every item has its own ConfirmationDialog)
@@ -31,6 +32,7 @@ export default function ConfirmationDialog({
   title,
   selectedPrice,
   options,
+  quantity,
 }: IProps) {
   const commentRef = useRef<HTMLTextAreaElement>(null);
   const [selectedOptions, setSelectedOptions] = useState<TOptions>(() =>
@@ -55,7 +57,7 @@ export default function ConfirmationDialog({
           Array.isArray(v) ? v.join(', ') : v,
         ])
       ),
-      quantity: 1,
+      quantity: quantity || 1,
       note: commentRef.current?.value || '',
     });
     toast.success(

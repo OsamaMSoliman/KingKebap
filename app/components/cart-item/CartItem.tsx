@@ -14,14 +14,30 @@ interface IProps {
 }
 
 export default function CartItem({ cartId }: IProps) {
-  const { name, options, quantity, price, note, id } = selectItem(cartId) ?? {};
+  const item = selectItem(cartId);
+  if (!item) throw new Error('Item not found');
+  const { name, options, quantity, price, note, id } = item;
 
   const handleIncrease = () => setIncrementItem(cartId);
   const handleDecrease = () => setDecrementItem(cartId);
 
-  const totalPrice = (
-    parseFloat((price ?? '0').replace(',', '.')) * (quantity ?? 0)
-  ).toFixed(2);
+  const totalPrice = parseFloat(price.replace(',', '.')) * quantity;
+
+  const optionKeys = Object.keys(options ?? {});
+  const renderOptions = optionKeys.length > 0 && (
+    <ul className="list-inside list-disc">
+      {Object.entries(options!).map(([key, value], index) => (
+        <li key={index} className="text-sm text-gray-600">
+          {key}:{' '}
+          {value === 'true' || value === 'false' ? (
+            <Checkbox checked={value === 'true'} />
+          ) : (
+            value
+          )}
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <Dialog>
@@ -39,23 +55,13 @@ export default function CartItem({ cartId }: IProps) {
             </div>
 
             {/* Options */}
-            {options && Object.keys(options).length > 0 && (
+            {optionKeys.length > 0 && (
               <div className="mt-2">
+                {/* <p className="text-sm text-gray-600 underline"> {optionKeys.length} Options: */}
                 <p className="text-sm text-gray-600">
-                  Options: ( {Object.keys(options).length} )
+                  Options: ( {optionKeys.length} )
                 </p>
-                <ul className="list-inside list-disc">
-                  {Object.entries(options).map(([key, value], index) => (
-                    <li key={index} className="text-sm text-gray-600">
-                      {key}:{' '}
-                      {value === 'true' || value === 'false' ? (
-                        <Checkbox checked={value === 'true'} />
-                      ) : (
-                        value
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                {renderOptions}
               </div>
             )}
 
@@ -99,17 +105,18 @@ export default function CartItem({ cartId }: IProps) {
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-              <p className="text-lg font-semibold">{totalPrice}€</p>
+              <p className="text-lg font-semibold">{totalPrice.toFixed(2)}€</p>
             </div>
           </div>
         </div>
       </DialogTrigger>
       <ConfirmationDialog
         cartId={cartId}
-        id={id!}
-        title={name!}
-        selectedPrice={price!}
-        options={Object.keys(options!)}
+        id={id}
+        title={name}
+        selectedPrice={price}
+        options={optionKeys}
+        quantity={quantity}
       />
     </Dialog>
   );
