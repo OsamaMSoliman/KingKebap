@@ -1,7 +1,7 @@
-import { Button } from "../ui/button";
+import { Button } from '~/components/ui/button';
 
 interface IProps {
-  id: number;
+  id: string;
   image: string;
   name: string;
   price: string;
@@ -13,15 +13,15 @@ export default function Combo({
   image,
   name,
   price,
-  description = "+ Pommes + Getränk",
+  description = '+ Pommes + Getränk',
 }: IProps) {
   return (
     <div className="m-4 flex">
       <p
         className="bg-white px-1 py-2 text-center text-red-500"
-        style={{ writingMode: "vertical-lr" }}
+        style={{ writingMode: 'vertical-lr' }}
       >
-        Menü-{id}
+        Menü-{id.substring(3)}
       </p>
       <div className="flex grow items-center space-x-4 bg-red-600 p-2">
         {image && (

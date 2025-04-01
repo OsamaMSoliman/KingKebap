@@ -436,5 +436,31 @@
         }
       ]
     }
-  }
+  },
+  "combos": [
+    {
+      "id": "1001",
+      "name": "Dönertasche",
+      "price": "10,00",
+      "image": ""
+    },
+    {
+      "id": "1002",
+      "name": "Lahmacun-Döner",
+      "price": "11,00",
+      "image": ""
+    },
+    {
+      "id": "1003",
+      "name": "Dürüm Döner",
+      "price": "10,50",
+      "image": ""
+    },
+    {
+      "id": "1004",
+      "name": "Sucuk Tasche",
+      "price": "10,00",
+      "image": ""
+    }
+  ]
 }

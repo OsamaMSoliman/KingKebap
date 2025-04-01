@@ -1,34 +1,26 @@
-import Combo from "~/components/SpecialOffers/Combo";
+import Combo from '~/components/SpecialOffers/Combo';
+import DialogBox from '~/components/dialogbox/DialogBox';
+import { Dialog, DialogTrigger } from '~/components/ui/dialog';
 
-const menuItems = [
-  {
-    name: "Dönertasche",
-    price: "10,00",
-    image: "", // Replace with actual path
-  },
-  {
-    name: "Lahmacun-Döner",
-    price: "11,00",
-    image: "", // Replace with actual path
-  },
-  {
-    name: "Dürüm Döner",
-    price: "10,50",
-    image: "", // Replace with actual path
-  },
-  {
-    name: "Sucuk Tasche",
-    price: "10,00",
-    image: "", // Replace with actual path
-  },
-];
+import { combos } from '~/data/menu.json';
 
 export default function ComboMeals() {
   return (
     <>
       <p className="text-center text-6xl font-extrabold my-4">Menü</p>
-      {menuItems.map((item, index) => (
-        <Combo key={index} id={index + 1} {...item} />
+      {combos.map((item, index) => (
+        <Dialog key={index}>
+          <DialogTrigger asChild>
+            <div>
+              <Combo {...item} />
+            </div>
+          </DialogTrigger>
+          <DialogBox
+            id={item.id}
+            title={`${item.name} Menü-${item.id.substring(3)}`}
+            selectedPrice={item.price}
+          />
+        </Dialog>
       ))}
     </>
   );

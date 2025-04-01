@@ -21,7 +21,7 @@ interface IProps {
   id: string;
   title: string;
   selectedPrice: string;
-  options: Array<string>;
+  options?: Array<string>;
   quantity?: number;
 }
 
@@ -31,7 +31,7 @@ export default function DialogBox({
   id,
   title,
   selectedPrice,
-  options,
+  options = [],
   quantity,
 }: IProps) {
   const commentRef = useRef<HTMLTextAreaElement>(null);
