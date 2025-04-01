@@ -99,7 +99,7 @@ export default function SidePanel() {
     await submit(
       {
         ...contactInfo,
-        items: getAllItems(),
+        order: getAllItems(),
       },
       {
         method: 'POST',
