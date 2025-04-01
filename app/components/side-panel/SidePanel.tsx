@@ -28,30 +28,51 @@ import {
 } from '~/stores/ContactStore';
 import { useSidePanelStore } from '~/stores/SidePanelStore';
 
-interface IProps {}
-
 type AccordionValue = 'user-info' | 'user-cart';
 
-export default function SidePanel({}: IProps) {
+export default function SidePanel() {
   const show = useSidePanelStore((state) => state.show);
   const toggle = useSidePanelStore((state) => state.toggle);
 
   const contactInfo = useContactStore();
-  const defaultAccordion = useMemo(
-    () =>
-      Object.entries(contactInfo)
-        .filter(([key, _]) => key !== 'bemerkungen') // all required excluding bemerkungen
-        .some(([_, info]) => info === '') // if any of the required is empty
-        ? 'user-info'
-        : 'user-cart',
-    [contactInfo]
-  );
-  const [accordionValue, setAccordionValue] =
-    useState<AccordionValue>(defaultAccordion);
 
-  const handleToggle = (open: boolean): void => {
+  // State for the accordion value
+  const [accordionValue, setAccordionValue] = useState<AccordionValue>();
+
+  // Calculate the desired accordion state based on contact info
+  const shouldShowUserInfo = useMemo(() => {
+    return Object.entries(contactInfo)
+      .filter(([key]) => key !== 'bemerkungen')
+      .some(([_, info]) => info === '');
+  }, [contactInfo]);
+
+  // Effect to handle initial hydration and contact info changes
+  useEffect(() => {
+    const unsubscribe = useContactStore.persist.onFinishHydration(() => {
+      setAccordionValue(shouldShowUserInfo ? 'user-info' : 'user-cart');
+    });
+
+    // If already hydrated, set immediately
+    if (useContactStore.persist.hasHydrated()) {
+      setAccordionValue(shouldShowUserInfo ? 'user-info' : 'user-cart');
+    }
+
+    return () => unsubscribe();
+  }, [shouldShowUserInfo]);
+
+  // Handle panel toggle - reset accordion based on current contact info
+  const handleToggleSidePanel = (open: boolean): void => {
     toggle();
-    setAccordionValue(defaultAccordion);
+    if (open) {
+      setAccordionValue(shouldShowUserInfo ? 'user-info' : 'user-cart');
+    }
+  };
+
+  // Only allow manual accordion changes when all required fields are filled
+  const handleAccordionChange = (value: AccordionValue) => {
+    if (!shouldShowUserInfo) {
+      setAccordionValue(value);
+    }
   };
 
   const {
@@ -95,12 +116,12 @@ export default function SidePanel({}: IProps) {
     );
 
   return (
-    <Sheet open={show} onOpenChange={handleToggle}>
+    <Sheet open={show} onOpenChange={handleToggleSidePanel}>
       <SheetContent aria-describedby={undefined}>
         <SheetHeader className="pb-0">
           <SheetTitle>Zur Kasse</SheetTitle>
 
-          <SheetDescription>
+          <SheetDescription asChild>
             <ToggleGroup
               className="w-full border border-gray-300"
               value={contactInfo['wo?'] as 'Lieferung' | 'Abholung'}
@@ -117,12 +138,12 @@ export default function SidePanel({}: IProps) {
             type="single"
             className="w-full"
             value={accordionValue}
-            onValueChange={(value: AccordionValue) => setAccordionValue(value)}
+            onValueChange={handleAccordionChange}
           >
             <AccordionItem value="user-info">
               <AccordionTrigger>Kontaktformular</AccordionTrigger>
               <AccordionContent>
-                <UserInfo />
+                <UserInfo onSubmit={() => handleAccordionChange('user-cart')} />
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="user-cart">

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from '~/components/ui/button';
-import { setContactInfo, useContactStore } from '~/stores/ContactStore';
+import { setContactInfos, useContactStore } from '~/stores/ContactStore';
 
-export default function UserInfo() {
+interface IProps {
+  onSubmit: () => void;
+}
+
+export default function UserInfo({ onSubmit }: IProps) {
   const contactInfo = useContactStore();
   const [formData, setFormData] = useState(contactInfo);
 
@@ -14,13 +18,13 @@ export default function UserInfo() {
       ...formData,
       [name]: value,
     });
-    setContactInfo(name as keyof typeof contactInfo, value);
+    // setContactInfo(name as keyof typeof contactInfo, value);
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    // TODO Handle form submission here
-    console.log(formData);
+    setContactInfos(formData);
+    onSubmit();
   };
 
   return (

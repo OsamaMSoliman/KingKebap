@@ -23,6 +23,8 @@ export const setContactInfo = (
   key: keyof typeof initialState,
   value: string
 ): void => useContactStore.setState((state) => ({ ...state, [key]: value }));
+export const setContactInfos = (info: typeof initialState): void =>
+  useContactStore.setState((state) => ({ ...state, ...info }));
 export const setCompleteReset = (): void => {
   useContactStore.persist.clearStorage();
   useContactStore.setState(initialState);
