@@ -17,22 +17,16 @@ export const useContactStore = create<ContactInfo>()(
   persist(() => initialState, { name: 'contact-info' })
 );
 
-// actions
-// export const selectContactInfo = (): typeof initialState => useContactStore.getState();
-export const setContactInfo = (
-  key: keyof typeof initialState,
-  value: string
-): void => useContactStore.setState((state) => ({ ...state, [key]: value }));
-export const setContactInfos = (info: typeof initialState): void =>
-  useContactStore.setState((state) => ({ ...state, ...info }));
-export const setCompleteReset = (): void => {
-  useContactStore.persist.clearStorage();
-  useContactStore.setState(initialState);
+const actions = {
+  getInfos: (): typeof initialState => useContactStore.getState(),
+  setInfos: (info: Partial<typeof initialState>) =>
+    useContactStore.setState((state) => ({ ...state, ...info })),
+  reset: () => {
+    useContactStore.persist.clearStorage();
+    useContactStore.setState(initialState);
+  },
+  setDeliveryMethod: (method: 'Lieferung' | 'Abholung') =>
+    useContactStore.setState((state) => ({ ...state, 'wo?': method })),
 };
-export const setLieferungOderAbholung = (
-  value: 'Lieferung' | 'Abholung'
-): void =>
-  useContactStore.setState((state) => ({
-    ...state,
-    'wo?': value,
-  }));
+
+export const { getInfos, setInfos, reset, setDeliveryMethod } = actions;

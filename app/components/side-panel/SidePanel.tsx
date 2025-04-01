@@ -22,58 +22,51 @@ import {
 import UserInfo from '~/components/user-info/UserInfo';
 import type { action as checkoutAction } from '~/routes/checkout';
 import { getAllItems } from '~/stores/CartStore';
-import {
-  setLieferungOderAbholung,
-  useContactStore,
-} from '~/stores/ContactStore';
+import { setDeliveryMethod, useContactStore } from '~/stores/ContactStore';
 import { useSidePanelStore } from '~/stores/SidePanelStore';
 
 type AccordionValue = 'user-info' | 'user-cart';
 
 export default function SidePanel() {
-  const show = useSidePanelStore((state) => state.show);
-  const toggle = useSidePanelStore((state) => state.toggle);
-
+  const { show, toggle } = useSidePanelStore();
   const contactInfo = useContactStore();
 
-  // State for the accordion value
+  // Accordion state management
   const [accordionValue, setAccordionValue] = useState<AccordionValue>();
 
-  // Calculate the desired accordion state based on contact info
-  const shouldShowUserInfo = useMemo(() => {
-    return Object.entries(contactInfo)
-      .filter(([key]) => key !== 'bemerkungen')
-      .some(([_, info]) => info === '');
-  }, [contactInfo]);
+  // Memoized calculation for required fields
+  const hasEmptyRequiredFields = useMemo(
+    () =>
+      Object.entries(contactInfo)
+        .filter(([key]) => key !== 'bemerkungen')
+        .some(([_, info]) => !info),
+    [contactInfo]
+  );
 
-  // Effect to handle initial hydration and contact info changes
+  // Handle hydration and contact info changes
   useEffect(() => {
-    const unsubscribe = useContactStore.persist.onFinishHydration(() => {
-      setAccordionValue(shouldShowUserInfo ? 'user-info' : 'user-cart');
-    });
+    const updateAccordion = () => {
+      setAccordionValue(hasEmptyRequiredFields ? 'user-info' : 'user-cart');
+    };
 
+    const unsubscribe =
+      useContactStore.persist.onFinishHydration(updateAccordion);
     // If already hydrated, set immediately
-    if (useContactStore.persist.hasHydrated()) {
-      setAccordionValue(shouldShowUserInfo ? 'user-info' : 'user-cart');
-    }
+    if (useContactStore.persist.hasHydrated()) updateAccordion();
 
-    return () => unsubscribe();
-  }, [shouldShowUserInfo]);
+    return unsubscribe;
+  }, [hasEmptyRequiredFields]);
 
-  // Handle panel toggle - reset accordion based on current contact info
+  // Panel toggle handler
   const handleToggleSidePanel = (open: boolean): void => {
     toggle();
-    if (open) {
-      setAccordionValue(shouldShowUserInfo ? 'user-info' : 'user-cart');
-    }
+    if (open)
+      setAccordionValue(hasEmptyRequiredFields ? 'user-info' : 'user-cart');
   };
 
   // Only allow manual accordion changes when all required fields are filled
-  const handleAccordionChange = (value: AccordionValue) => {
-    if (!shouldShowUserInfo) {
-      setAccordionValue(value);
-    }
-  };
+  const handleAccordionChange = (value: AccordionValue) =>
+    !hasEmptyRequiredFields && setAccordionValue(value);
 
   const {
     data: receivedData,
@@ -125,7 +118,7 @@ export default function SidePanel() {
             <ToggleGroup
               className="w-full border border-gray-300"
               value={contactInfo['wo?'] as 'Lieferung' | 'Abholung'}
-              onValueChange={setLieferungOderAbholung}
+              onValueChange={setDeliveryMethod}
             >
               <ToggleItem value="Lieferung">Lieferung</ToggleItem>
               <ToggleItem value="Abholung">Abholung</ToggleItem>
