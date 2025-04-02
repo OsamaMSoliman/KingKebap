@@ -1,4 +1,4 @@
-import { options as OverallOptions } from '~/data/menu.json';
+import { options as OPTIONS } from '~/data/menu.json';
 
 import type { Dispatch, SetStateAction } from 'react';
 import { ToggleGroup, ToggleItem } from '~/components/toggle-group/ToggleGroup';
@@ -7,33 +7,36 @@ import { Checkbox } from '~/components/ui/checkbox';
 export type TOptions = { [key: string]: string | string[] };
 
 interface IProps {
-  options: Array<string>;
+  optionKeys: Array<string>;
   selectedOptions: TOptions;
   setSelectedOptions: Dispatch<SetStateAction<TOptions>>;
+  multipleOptionSelection?: { [optionKey: string]: boolean };
 }
 
 export default function Options({
-  options,
+  optionKeys,
   selectedOptions,
   setSelectedOptions,
+  multipleOptionSelection,
 }: IProps) {
-  return options.map((option, i) => {
-    const optionValues = OverallOptions[option as keyof typeof OverallOptions];
-    const isMultiple = false; // values.length > 1;
+  return optionKeys.map((opKey, i) => {
+    // const [firstOption] = OPTIONS[opKey as keyof typeof OPTIONS];
+    // multipleOptionSelection?.[opKey] ? [firstOption] : firstOption;
+    const options = OPTIONS[opKey as keyof typeof OPTIONS];
 
     const value =
-      selectedOptions[option] ||
-      (isMultiple ? [optionValues[0]] : optionValues[0]);
+      selectedOptions[opKey] ||
+      (multipleOptionSelection?.[opKey] ? [options[0]] : options[0]);
 
     return (
       <OptionRenderer
         key={i}
-        option={option}
-        optionValues={optionValues}
+        option={opKey}
+        optionValues={options}
         value={value}
-        isMultiple={isMultiple}
+        isMultiple={multipleOptionSelection?.[opKey]}
         onChange={(newValue) =>
-          setSelectedOptions((prev) => ({ ...prev, [option]: newValue }))
+          setSelectedOptions((prev) => ({ ...prev, [opKey]: newValue }))
         }
       />
     );
@@ -50,7 +53,7 @@ const OptionRenderer = ({
   option: string;
   optionValues: string[];
   value: string | string[];
-  isMultiple: boolean;
+  isMultiple?: boolean;
   onChange: (newValue: string | string[]) => void;
 }) => {
   if (optionValues[0] === 'true' || optionValues[0] === 'false') {
@@ -76,7 +79,7 @@ const OptionRenderer = ({
       <p className="mb-2 font-semibold">{option}:</p>
       <ToggleGroup
         value={value}
-        onValueChange={(newValue) => onChange(newValue as string | string[])}
+        onValueChange={(newValue: string | string[]) => onChange(newValue)}
         multiple={isMultiple}
         className="h-auto w-full flex-wrap gap-x-3 gap-y-1"
       >

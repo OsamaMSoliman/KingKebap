@@ -115,8 +115,15 @@ export default function CartItem({ cartId }: IProps) {
         id={id}
         title={name}
         selectedPrice={price}
-        options={optionKeys}
+        optionKeys={optionKeys}
         quantity={quantity}
+        multipleOptionSelection={optionKeys.reduce(
+          (acc, key) => ({
+            ...acc,
+            [key]: options![key].includes(',') ?? false,
+          }),
+          {}
+        )}
       />
     </Dialog>
   );

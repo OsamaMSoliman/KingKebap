@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react';
+import DialogBox from '~/components/dialogbox/DialogBox';
+import { Dialog, DialogTrigger } from '~/components/ui/dialog';
+import { options } from '~/data/menu.json';
+const { Belag } = options;
 
 interface IProps {
   basePrice?: number;
@@ -29,8 +33,8 @@ export default function ({
   };
 
   return (
-    <>
-      <div className="m-4 flex min-w-sm flex-col gap-4 rounded-lg bg-white">
+    <div className="m-4 flex min-w-sm flex-col gap-4 rounded-lg bg-white">
+      <Dialog>
         <div className="mx-5 mt-2 text-center">
           <h3 className="mb-2 text-3xl font-bold text-red-500">
             Pizzablech 60x40cm 🍕
@@ -50,14 +54,14 @@ export default function ({
         <div className="mx-3 mb-2 flex gap-4">
           {/* Zutaten Grid */}
           <div className="mb-4 grid flex-5 grid-cols-4 gap-2 text-black">
-            {["A", "B", "C", "D", "E", "F", "G", "H"].map((zutat) => (
+            {Belag.map((zutat) => (
               <button
                 key={zutat}
                 onClick={() => toggleZutat(zutat)}
                 className={`rounded-lg border-2 p-2 transition-all ${
                   selectedZutaten.includes(zutat)
-                    ? "border-orange-500 bg-orange-50"
-                    : "border-transparent bg-gray-100"
+                    ? 'border-orange-500 bg-orange-50'
+                    : 'border-transparent bg-gray-100'
                 }`}
               >
                 {zutat}
@@ -65,19 +69,29 @@ export default function ({
             ))}
           </div>
 
-          <button
-            className="flex flex-1 items-center justify-center bg-red-500 pr-2 pl-8 hover:bg-red-700"
-            // className="flex flex-1 items-center justify-center bg-red-500 px-5 hover:bg-red-700"
-            style={{
-              clipPath: "polygon(100% 0,  100% 100%, 25% 100%, 0 50%, 25% 0)",
-              // clipPath:
-              // "polygon( 25% 0, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0 50% )",
-            }}
-          >
-            <p className="text-3xl font-bold text-nowrap oldstyle-nums tabular-nums">{`${totalPrice.toFixed(2)} Є`}</p>
-          </button>
+          <DialogTrigger asChild>
+            <button
+              className="flex flex-1 items-center justify-center bg-red-500 pr-2 pl-8 hover:bg-red-700"
+              // className="flex flex-1 items-center justify-center bg-red-500 px-5 hover:bg-red-700"
+              style={{
+                clipPath: 'polygon(100% 0,  100% 100%, 25% 100%, 0 50%, 25% 0)',
+                // clipPath:
+                // "polygon( 25% 0, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0 50% )",
+              }}
+            >
+              <p className="text-3xl font-bold text-nowrap oldstyle-nums tabular-nums">{`${totalPrice.toFixed(2)} Є`}</p>
+            </button>
+          </DialogTrigger>
         </div>
-      </div>
-    </>
+
+        <DialogBox
+          id="Pizzablech"
+          title="Pizzablech"
+          selectedPrice={totalPrice.toString()}
+          // options={['Belag']}
+          preSelectedOptions={{ Belag: selectedZutaten }}
+        />
+      </Dialog>
+    </div>
   );
 }

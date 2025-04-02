@@ -3,7 +3,7 @@ import Item from '~/components/Menu/Item';
 import List from '~/components/Menu/List';
 import Pizzablech from '~/components/SpecialOffers/Pizzablech';
 
-import { dishes as MENU, options as OverallOptions } from '~/data/menu.json';
+import { dishes as MENU, options as OPTIONS } from '~/data/menu.json';
 
 export default function () {
   return (
@@ -24,10 +24,10 @@ export default function () {
           >
             {menu.items.map((item, j) => {
               const description = 'description' in item ? item.description : '';
-              const options: string[] =
+              const optionKeys: string[] =
                 'options' in item ? (item.options as Array<string>) : [];
-              options?.push(
-                ...Object.keys(OverallOptions).filter((option) =>
+              optionKeys?.push(
+                ...Object.keys(OPTIONS).filter((option) =>
                   description?.includes(option)
                 )
               );
@@ -40,7 +40,7 @@ export default function () {
                   prices={item.prices}
                   description={description}
                   note={'note' in item ? item.note : undefined}
-                  options={options}
+                  optionKeys={optionKeys}
                 />
               );
             })}

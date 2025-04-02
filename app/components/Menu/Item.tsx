@@ -10,7 +10,7 @@ interface IProps {
   note?: string;
   description?: string;
   prices: Array<string>;
-  options?: Array<string>;
+  optionKeys?: Array<string>;
 }
 
 export default function Item({
@@ -19,7 +19,7 @@ export default function Item({
   description,
   note = 'A,G',
   prices,
-  options = [],
+  optionKeys = [],
 }: IProps) {
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
@@ -43,7 +43,7 @@ export default function Item({
               id={id}
               title={title}
               selectedPrice={selectedPrice!}
-              options={options}
+              optionKeys={optionKeys}
             />
           </Dialog>
         </div>

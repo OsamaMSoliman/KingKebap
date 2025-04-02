@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from '~/components/ui/dialog';
 import { Textarea } from '~/components/ui/textarea';
-import { options as OverallOptions } from '~/data/menu.json';
+import { options as OPTIONS } from '~/data/menu.json';
 import { setUpsertItem } from '~/stores/CartStore';
 import Options, { type TOptions } from './Options';
 
@@ -21,8 +21,10 @@ interface IProps {
   id: string;
   title: string;
   selectedPrice: string;
-  options?: Array<string>;
+  optionKeys?: Array<string>;
   quantity?: number;
+  preSelectedOptions?: TOptions;
+  multipleOptionSelection?: { [optionKey: string]: boolean };
 }
 
 // This dialog box is used to confirm the options selected per item (every item has its own DialogBox)
@@ -31,16 +33,18 @@ export default function DialogBox({
   id,
   title,
   selectedPrice,
-  options = [],
+  optionKeys = [],
   quantity,
+  preSelectedOptions,
+  multipleOptionSelection,
 }: IProps) {
   const commentRef = useRef<HTMLTextAreaElement>(null);
   const [selectedOptions, setSelectedOptions] = useState<TOptions>(() =>
-    options.reduce<TOptions>((defaults, option) => {
-      const [firstOptionValue] =
-        OverallOptions[option as keyof typeof OverallOptions];
-      const isMultiple = false; // values.length > 1;
-      defaults[option] = isMultiple ? [firstOptionValue] : firstOptionValue;
+    optionKeys.reduce<TOptions>((defaults, opKey) => {
+      const [firstOption] = OPTIONS[opKey as keyof typeof OPTIONS];
+      defaults[opKey] = multipleOptionSelection?.[opKey]
+        ? [firstOption]
+        : firstOption;
       return defaults;
     }, {})
   );
@@ -52,10 +56,9 @@ export default function DialogBox({
       name: title,
       price: selectedPrice!,
       options: Object.fromEntries(
-        Object.entries(selectedOptions).map(([k, v]) => [
-          k,
-          Array.isArray(v) ? v.join(', ') : v,
-        ])
+        Object.entries({ ...preSelectedOptions, ...selectedOptions }).map(
+          ([k, v]) => [k, Array.isArray(v) ? v.join(', ') : v]
+        )
       ),
       quantity: quantity || 1,
       note: commentRef.current?.value || '',
@@ -103,7 +106,7 @@ export default function DialogBox({
 
       <div className="w-full">
         <Options
-          options={options}
+          optionKeys={optionKeys}
           selectedOptions={selectedOptions}
           setSelectedOptions={setSelectedOptions}
         />
