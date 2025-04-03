@@ -1,4 +1,4 @@
-import { Loader2 } from 'lucide-react';
+import { Loader2, ShoppingCart } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useFetcher } from 'react-router';
 import { toast } from 'sonner';
@@ -159,6 +159,7 @@ export default function SidePanel() {
         <SheetFooter>
           <SheetClose asChild>
             <Button type="submit" onClick={onClick} disabled={canNotSend}>
+              {!canNotSend && <ShoppingCart className="mr-1 h-5 w-5" />}
               Jetzt Bestellen
               {canNotSend && <Loader2 className="animate-spin" />}
             </Button>
