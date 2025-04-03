@@ -33,7 +33,10 @@ export default function ({
   };
 
   return (
-    <div className="m-4 flex min-w-sm flex-col gap-4 rounded-lg bg-white">
+    <div
+      className="m-4 flex min-w-sm flex-col gap-4 rounded-lg bg-white"
+      id="Pizzablech"
+    >
       <Dialog>
         <div className="mx-5 mt-2 text-center">
           <h3 className="mb-2 text-3xl font-bold text-red-500">
@@ -85,7 +88,7 @@ export default function ({
         </div>
 
         <DialogBox
-          id="Pizzablech"
+          id="Pizzablech-DialogBox-NoOp"
           title="Pizzablech"
           selectedPrice={totalPrice.toString()}
           options={{

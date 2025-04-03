@@ -11,7 +11,7 @@ export default function () {
     <>
       <p className="my-4 text-center text-6xl font-extrabold">Speisekarte</p>
       {Object.entries(MENU).map(([title, menu], i) => (
-        <div key={`Menu-${i}`}>
+        <div key={`Menu-${i}`} id={title}>
           <List
             header={
               <Header

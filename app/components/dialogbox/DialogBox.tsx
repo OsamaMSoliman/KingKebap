@@ -88,7 +88,7 @@ export default function DialogBox({
       <DHeader selectedPrice={selectedPrice} />
 
       <div className="w-full">
-        {id !== 'Pizzablech' && (
+        {id !== 'Pizzablech-DialogBox-NoOp' && (
           <Options
             selectedOptions={selectedOptions}
             setSelectedOptions={setSelectedOptions}
