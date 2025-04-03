@@ -1,7 +1,7 @@
 import type { Route } from './+types/home';
 import ComboMeals from './combo-meals';
 import Menu from './menu';
-import Offers from './offers';
+import Offers, { DonnerstagAngebot, MontagAngebot } from './offers';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -12,25 +12,10 @@ export function meta({}: Route.MetaArgs) {
 
 export async function loader({ params }: Route.LoaderArgs) {
   const today = new Date(); // Get the current date
-  // console.log(
-  //   today,
-  //   today.getDay(),
-  //   today.toLocaleDateString(),
-  //   today.toLocaleTimeString(),
-  //   today.toLocaleString(),
-  // );
+
   return {
     isMonday: today.getDay() === 1, //  (1 corresponds to Monday)
     isTuesday: today.getDay() === 4, //  (1 corresponds to Teusday)
-    today: [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ][today.getDay()],
   };
 }
 
@@ -39,19 +24,41 @@ export function HydrateFallback() {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { today, isMonday, isTuesday } = loaderData;
+  const { isMonday, isTuesday } = loaderData;
 
   return (
     <>
-      <div>
-        <h1>Welcome, today is {today}!</h1>
-        {isMonday ? <p>Today is Monday!</p> : <p>Today is not Monday.</p>}
-        {isTuesday ? <p>Today is Tuesday!</p> : <p>Today is not Tuesday.</p>}
-      </div>
-      {/* TODO: show the offer of the day on top, maybe in the navbar ?*/}
+      <ShowOfferOfTheDay isMonday={isMonday} isTuesday={isTuesday} />
       <ComboMeals />
       <Menu />
       <Offers />
     </>
   );
 }
+
+const ShowOfferOfTheDay = ({
+  isMonday,
+  isTuesday,
+}: {
+  isMonday: boolean;
+  isTuesday: boolean;
+}) => (
+  <>
+    {isMonday && (
+      <>
+        <p className="text-center text-6xl font-extrabold my-4">
+          Heute ist Dönertag!
+        </p>
+        <MontagAngebot />
+      </>
+    )}
+    {isTuesday && (
+      <>
+        <p className="text-center text-6xl font-extrabold my-4">
+          Heute ist Pizzatag!
+        </p>
+        <DonnerstagAngebot />
+      </>
+    )}
+  </>
+);
