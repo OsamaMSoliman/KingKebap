@@ -1,3 +1,4 @@
+import { Loader2 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useFetcher } from 'react-router';
 import { toast } from 'sonner';
@@ -72,8 +73,10 @@ export default function SidePanel() {
     data: receivedData,
     formData: sentData,
     submit,
-    state, // TODO: prevent the user from submitting multiple times
+    state,
   } = useFetcher<typeof checkoutAction>();
+
+  const canNotSend = state !== 'idle';
 
   useEffect(() => {
     if (receivedData?.ok) {
@@ -95,7 +98,11 @@ export default function SidePanel() {
     }
   }, [receivedData]);
 
-  const onClick = async () =>
+  const onClick = async () => {
+    if (canNotSend) {
+      toast.error('Bitte warten Sie, bis die Bestellung verarbeitet wurde');
+      return;
+    }
     await submit(
       {
         ...contactInfo,
@@ -107,6 +114,7 @@ export default function SidePanel() {
         encType: 'application/json',
       }
     );
+  };
 
   return (
     <Sheet open={show} onOpenChange={handleToggleSidePanel}>
@@ -150,8 +158,9 @@ export default function SidePanel() {
 
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit" onClick={onClick}>
+            <Button type="submit" onClick={onClick} disabled={canNotSend}>
               Jetzt Bestellen
+              {canNotSend && <Loader2 className="animate-spin" />}
             </Button>
           </SheetClose>
         </SheetFooter>
