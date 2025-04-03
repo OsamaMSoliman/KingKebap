@@ -1,3 +1,4 @@
+import type { TOptions } from '~/components/dialogbox/Options';
 import Header from '~/components/Menu/Header';
 import Item from '~/components/Menu/Item';
 import List from '~/components/Menu/List';
@@ -32,6 +33,12 @@ export default function () {
                 )
               );
 
+              const options = optionKeys.reduce<TOptions>((defaults, opKey) => {
+                const [firstOption] = OPTIONS[opKey as keyof typeof OPTIONS];
+                defaults[opKey] = false ? [firstOption] : firstOption; // isMultiple ?
+                return defaults;
+              }, {});
+
               return (
                 <Item
                   key={`Item-${i}-${j}`}
@@ -40,7 +47,7 @@ export default function () {
                   prices={item.prices}
                   description={description}
                   note={'note' in item ? item.note : undefined}
-                  optionKeys={optionKeys}
+                  options={options}
                 />
               );
             })}

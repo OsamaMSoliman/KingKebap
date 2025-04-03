@@ -1,40 +1,31 @@
-import { options as OPTIONS } from '~/data/menu.json';
-
 import type { Dispatch, SetStateAction } from 'react';
 import { ToggleGroup, ToggleItem } from '~/components/toggle-group/ToggleGroup';
 import { Checkbox } from '~/components/ui/checkbox';
+import { options as OPTIONS } from '~/data/menu.json';
 
 export type TOptions = { [key: string]: string | string[] };
 
 interface IProps {
-  optionKeys: Array<string>;
   selectedOptions: TOptions;
+  // selectedOptions: { [key: string]: IOption };
   setSelectedOptions: Dispatch<SetStateAction<TOptions>>;
-  multipleOptionSelection?: { [optionKey: string]: boolean };
 }
 
 export default function Options({
-  optionKeys,
   selectedOptions,
   setSelectedOptions,
-  multipleOptionSelection,
 }: IProps) {
-  return optionKeys.map((opKey, i) => {
-    // const [firstOption] = OPTIONS[opKey as keyof typeof OPTIONS];
-    // multipleOptionSelection?.[opKey] ? [firstOption] : firstOption;
-    const options = OPTIONS[opKey as keyof typeof OPTIONS];
-
-    const value =
-      selectedOptions[opKey] ||
-      (multipleOptionSelection?.[opKey] ? [options[0]] : options[0]);
-
+  return Object.entries(selectedOptions).map(([opKey, option], i) => {
     return (
       <OptionRenderer
         key={i}
-        option={opKey}
-        optionValues={options}
-        value={value}
-        isMultiple={multipleOptionSelection?.[opKey]}
+        opKey={opKey}
+        opValue={option}
+        allOpChoices={OPTIONS[opKey as keyof typeof OPTIONS]}
+        forceIsMultiple={undefined}
+        // opValue={option.opValue}
+        // allOpChoices={option.allOpChoices}
+        // forceIsMultiple={option.forceIsMultiple}
         onChange={(newValue) =>
           setSelectedOptions((prev) => ({ ...prev, [opKey]: newValue }))
         }
@@ -43,32 +34,35 @@ export default function Options({
   });
 }
 
+interface IOption {
+  opKey: string; // option key
+  opValue: string | string[]; // option default or selected values
+  allOpChoices: string[]; // all possible values for the option
+  forceIsMultiple?: boolean; // if multiple values can be selected
+}
+
 const OptionRenderer = ({
-  option,
-  optionValues,
-  value,
-  isMultiple,
+  opKey,
+  allOpChoices,
+  opValue,
+  forceIsMultiple,
   onChange,
-}: {
-  option: string;
-  optionValues: string[];
-  value: string | string[];
-  isMultiple?: boolean;
+}: IOption & {
   onChange: (newValue: string | string[]) => void;
 }) => {
-  if (optionValues[0] === 'true' || optionValues[0] === 'false') {
+  if (allOpChoices[0] === 'true' || allOpChoices[0] === 'false') {
     return (
       <div className="mb-8 flex items-center space-x-2">
         <Checkbox
-          id={option}
-          checked={value === 'true'}
+          id={opKey}
+          checked={opValue === 'true'}
           onCheckedChange={(checked) => onChange(checked ? 'true' : 'false')}
         />
         <label
-          htmlFor={option}
+          htmlFor={opKey}
           className="text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
-          {option}
+          {opKey}
         </label>
       </div>
     );
@@ -76,14 +70,14 @@ const OptionRenderer = ({
 
   return (
     <div className="mb-8">
-      <p className="mb-2 font-semibold">{option}:</p>
+      <p className="mb-2 font-semibold">{opKey}:</p>
       <ToggleGroup
-        value={value}
+        value={opValue}
         onValueChange={(newValue: string | string[]) => onChange(newValue)}
-        multiple={isMultiple}
+        multiple={forceIsMultiple}
         className="h-auto w-full flex-wrap gap-x-3 gap-y-1"
       >
-        {optionValues.map((value, j) => (
+        {allOpChoices.map((value, j) => (
           <ToggleItem key={j} value={value} className="flex-auto">
             {value}
           </ToggleItem>

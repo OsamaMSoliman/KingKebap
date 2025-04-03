@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+import type { TOptions } from '~/components/dialogbox/Options';
 
 export interface ICartItem {
   cartId: string;
@@ -7,7 +8,7 @@ export interface ICartItem {
   name: string;
   price: string;
   quantity: number;
-  options?: Record<string, string>;
+  options?: TOptions;
   note?: string;
 }
 

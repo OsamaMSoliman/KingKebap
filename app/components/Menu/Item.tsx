@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import DialogBox from '~/components/dialogbox/DialogBox';
+import type { TOptions } from '~/components/dialogbox/Options';
 import { Dialog } from '~/components/ui/dialog';
 import Prices from './Prices';
 
@@ -10,7 +11,7 @@ interface IProps {
   note?: string;
   description?: string;
   prices: Array<string>;
-  optionKeys?: Array<string>;
+  options?: TOptions;
 }
 
 export default function Item({
@@ -19,7 +20,7 @@ export default function Item({
   description,
   note = 'A,G',
   prices,
-  optionKeys = [],
+  options,
 }: IProps) {
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
 
@@ -43,7 +44,7 @@ export default function Item({
               id={id}
               title={title}
               selectedPrice={selectedPrice!}
-              optionKeys={optionKeys}
+              options={options}
             />
           </Dialog>
         </div>

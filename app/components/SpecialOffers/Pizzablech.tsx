@@ -88,8 +88,9 @@ export default function ({
           id="Pizzablech"
           title="Pizzablech"
           selectedPrice={totalPrice.toString()}
-          // options={['Belag']}
-          preSelectedOptions={{ Belag: selectedZutaten }}
+          options={{
+            Belag: selectedZutaten,
+          }}
         />
       </Dialog>
     </div>

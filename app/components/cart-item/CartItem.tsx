@@ -31,6 +31,8 @@ export default function CartItem({ cartId }: IProps) {
           {key}:{' '}
           {value === 'true' || value === 'false' ? (
             <Checkbox checked={value === 'true'} />
+          ) : Array.isArray(value) ? (
+            value.join(' + ')
           ) : (
             value
           )}
@@ -115,15 +117,8 @@ export default function CartItem({ cartId }: IProps) {
         id={id}
         title={name}
         selectedPrice={price}
-        optionKeys={optionKeys}
         quantity={quantity}
-        multipleOptionSelection={optionKeys.reduce(
-          (acc, key) => ({
-            ...acc,
-            [key]: options![key].includes(',') ?? false,
-          }),
-          {}
-        )}
+        options={options}
       />
     </Dialog>
   );

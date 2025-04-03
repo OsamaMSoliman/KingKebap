@@ -12,7 +12,6 @@ import {
   DialogTitle,
 } from '~/components/ui/dialog';
 import { Textarea } from '~/components/ui/textarea';
-import { options as OPTIONS } from '~/data/menu.json';
 import { setUpsertItem } from '~/stores/CartStore';
 import Options, { type TOptions } from './Options';
 
@@ -21,10 +20,8 @@ interface IProps {
   id: string;
   title: string;
   selectedPrice: string;
-  optionKeys?: Array<string>;
   quantity?: number;
-  preSelectedOptions?: TOptions;
-  multipleOptionSelection?: { [optionKey: string]: boolean };
+  options?: TOptions;
 }
 
 // This dialog box is used to confirm the options selected per item (every item has its own DialogBox)
@@ -33,21 +30,11 @@ export default function DialogBox({
   id,
   title,
   selectedPrice,
-  optionKeys = [],
   quantity,
-  preSelectedOptions,
-  multipleOptionSelection,
+  options = {},
 }: IProps) {
   const commentRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedOptions, setSelectedOptions] = useState<TOptions>(() =>
-    optionKeys.reduce<TOptions>((defaults, opKey) => {
-      const [firstOption] = OPTIONS[opKey as keyof typeof OPTIONS];
-      defaults[opKey] = multipleOptionSelection?.[opKey]
-        ? [firstOption]
-        : firstOption;
-      return defaults;
-    }, {})
-  );
+  const [selectedOptions, setSelectedOptions] = useState<TOptions>(options);
 
   const handleUpsertItem = () => {
     setUpsertItem({
@@ -55,11 +42,7 @@ export default function DialogBox({
       id,
       name: title,
       price: selectedPrice!,
-      options: Object.fromEntries(
-        Object.entries({ ...preSelectedOptions, ...selectedOptions }).map(
-          ([k, v]) => [k, Array.isArray(v) ? v.join(', ') : v]
-        )
-      ),
+      options: { ...options, ...selectedOptions },
       quantity: quantity || 1,
       note: commentRef.current?.value || '',
     });
@@ -105,11 +88,12 @@ export default function DialogBox({
       <DHeader selectedPrice={selectedPrice} />
 
       <div className="w-full">
-        <Options
-          optionKeys={optionKeys}
-          selectedOptions={selectedOptions}
-          setSelectedOptions={setSelectedOptions}
-        />
+        {id !== 'Pizzablech' && (
+          <Options
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
+        )}
         <Textarea
           ref={commentRef}
           name="comment"
