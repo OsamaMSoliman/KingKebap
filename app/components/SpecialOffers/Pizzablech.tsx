@@ -54,9 +54,9 @@ export default function ({
           </div>
         </div>
 
-        <div className="mx-3 mb-2 flex gap-4">
+        <div className="mx-3 mb-2 flex gap-4 items-center">
           {/* Zutaten Grid */}
-          <div className="mb-4 grid flex-5 grid-cols-4 gap-2 text-black">
+          <div className="mb-4 grid flex-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-black">
             {Belag.map((zutat) => (
               <button
                 key={zutat}
@@ -74,7 +74,7 @@ export default function ({
 
           <DialogTrigger asChild>
             <button
-              className="flex flex-1 items-center justify-center bg-red-500 pr-2 pl-8 hover:bg-red-700"
+              className="flex flex-1 items-center justify-center bg-red-500 pr-2 pl-8 hover:bg-red-700 h-32"
               // className="flex flex-1 items-center justify-center bg-red-500 px-5 hover:bg-red-700"
               style={{
                 clipPath: 'polygon(100% 0,  100% 100%, 25% 100%, 0 50%, 25% 0)',
