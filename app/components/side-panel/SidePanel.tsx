@@ -82,18 +82,20 @@ export default function SidePanel() {
     if (receivedData?.ok) {
       console.log({ receivedData });
       toast.success('Bestellung wurde erfolgreich abgeschickt', {
-        action: {
-          label: 'Undo',
-          onClick: () => console.log('TODO: Undo'),
-        },
+        // TODO: 15 secs to "undo" the order before being sent
+        // TODO: cancel the order
+        // action: {
+        //   label: 'Undo',
+        //   onClick: () => console.log('TODO: Undo'),
+        // },
       });
     } else {
       // TODO: state why?
       toast.error('Bestellung konnte nicht abgeschickt werden', {
-        action: {
-          label: 'Undo',
-          onClick: () => console.log('TODO: Undo'),
-        },
+        // action: {
+        //   label: 'Undo',
+        //   onClick: () => console.log('TODO: Undo'),
+        // },
       });
     }
   }, [receivedData]);
