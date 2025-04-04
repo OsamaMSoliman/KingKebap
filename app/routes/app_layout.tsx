@@ -14,13 +14,14 @@ export default function AppLayout({ loaderData }: Route.ComponentProps) {
   const toggleFooter = () => setIsCollapsed(!isCollapsed);
 
   return (
-    <div className="mx-auto flex max-h-screen w-[80vw] max-w-[960px] min-w-[420px] flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-10 shadow-md">
+    <div className="mx-auto flex h-screen w-[80vw] max-w-[960px] min-w-[420px] flex-col">
+      {/* Header - fixed height */}
+      <header className="sticky top-0 z-10 h-16 shadow-md">
         <Navbar />
       </header>
-      {/* Scrollable Main Content */}
-      <main className="overflow-y-auto">
+
+      {/* Main Content - flex-1 to take remaining space */}
+      <main className="flex-1 overflow-y-auto">
         {/* <main className="mx-auto w-[80vw] max-w-[960px] min-w-[400px]"> */}
         {/* TODO: <ScrollArea className="h-full"> */}
         <Outlet />
@@ -29,11 +30,12 @@ export default function AppLayout({ loaderData }: Route.ComponentProps) {
         <SidePanel />
         <Toaster />
       </main>
-      {/* Footer */}
+
+      {/* Footer - fixed height with toggle */}
       <footer
         className="cursor-pointer overflow-hidden bg-gray-800 p-4 text-center transition-all duration-300 ease-in-out"
         onClick={toggleFooter}
-        style={{ height: isCollapsed ? '10em' : '110em' }}
+        style={{ height: isCollapsed ? '3em' : '30em' }}
       >
         <AboutUs
           isExpanded={!isCollapsed}
