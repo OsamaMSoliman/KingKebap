@@ -1,0 +1,11 @@
+@keyframes scroll-horizontally {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50.5%); }
+}
+
+/* This work if this file is imported as .css */
+@layer utilities {
+  .animate-scrollHorizontally {
+    animation: scroll-horizontally 10s linear infinite;
+  }
+}

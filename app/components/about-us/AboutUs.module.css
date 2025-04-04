@@ -1,0 +1,17 @@
+/* This work if this file is imported as styles from .module.css */
+.scrolling-content-vertically {
+  animation: scrollVertically 10s linear infinite;
+}
+
+@keyframes scrollVertically {
+  /* 0% { transform: translateY(0); } */
+  /* 100% { transform: translateY(-52.5%); } */
+  
+  /* with pausing after every line */
+  0%, 16% { transform: translateY(0); }         /* Lieferung ab 15€ Bestellwert frei Haus */
+  20%, 36% { transform: translateY(-9%); }    /* Taglich:	12:00-22:00 Uhr */
+  40%, 56% { transform: translateY(-17%); }    /* Sonn- & Feiertage:	13:00-22:00 Uhr */
+  60%, 76% { transform: translateY(-27%); }    /* Bachstrase 2 • 58762 Altena */
+  80%, 96% { transform: translateY(-40%); }    /* 02352 - 2670780 */
+  100% { transform: translateY(-50%); }        /* Reset position (using duplicate items) */
+}
