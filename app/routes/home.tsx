@@ -5,8 +5,8 @@ import Offers, { DonnerstagAngebot, MontagAngebot } from './offers';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'New React Router App' },
-    { name: 'description', content: 'Welcome to React Router!' },
+    { title: 'KingKebap' },
+    { name: 'description', content: 'Welcome to KingKebap restaurant!' },
   ];
 }
 

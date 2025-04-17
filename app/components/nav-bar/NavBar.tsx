@@ -22,6 +22,11 @@ export default function Navbar() {
         {/* Logo */}
         <div className="text-xl font-bold text-white">
           <a href="/" className="text-gray-300 hover:text-white">
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-8 w-auto inline-block mr-2"
+            />
             KingKebap
           </a>
         </div>
