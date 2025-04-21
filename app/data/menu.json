@@ -40,37 +40,43 @@
           "id": "02",
           "title": "Döner Dürüm 🌯",
           "prices": ["7,00"],
-          "description": "Dönerfleisch eingerollt im Dürüm mit Salat"
+          "description": "Dönerfleisch eingerollt im Dürüm mit Salat",
+          "note": "2,3,4,A,G"
         },
         {
           "id": "03",
           "title": "Sucuk Tasche",
           "prices": ["6,50", "8,50"],
-          "description": "türk. Knoblauchwurst im Fladenbrot mit Salat"
+          "description": "türk. Knoblauchwurst im Fladenbrot mit Salat",
+          "note": "2,3,4,8,A,G"
         },
         {
           "id": "04",
           "title": "Sucuk Dürüm 🌯",
           "prices": ["7,00"],
-          "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat"
+          "description": "türk. Knoblauchwurst eingerollt im Blätterteig mit Salat",
+          "note": "2,3,4,8,A,G"
         },
         {
           "id": "05",
           "title": "Schnitzel Tasche",
           "prices": ["6,50", "8,50"],
-          "description": "Hähnchenschnitzel im Fladenbrot mit Salat"
+          "description": "Hähnchenschnitzel im Fladenbrot mit Salat",
+          "note": "3,4,A,G"
         },
         {
           "id": "06",
           "title": "Pommes Tasche 🍟",
           "prices": ["5,00", "6,50"],
-          "description": "Pommes mit Saucen im Fladenbrot mit Salat"
+          "description": "Pommes mit Saucen im Fladenbrot mit Salat",
+          "note": "A,G"
         },
         {
           "id": "07",
           "title": "King Tasche",
           "prices": ["7,00", "9,00"],
-          "description": "Dönerfleisch und Sucuk im Fladenbrot mit Salat"
+          "description": "Dönerfleisch und Sucuk im Fladenbrot mit Salat",
+          "note": "2,3,4,8,A,G"
         }
       ]
     },
@@ -82,43 +88,50 @@
           "id": "10",
           "title": "Döner Teller",
           "prices": ["10,00"],
-          "description": "Dönerfleisch mit Salat und Beilage"
+          "description": "Dönerfleisch mit Salat und Beilage",
+          "note": "TODO"
         },
         {
           "id": "11",
           "title": "Döner Box",
           "prices": ["6,00", "7,00"],
-          "description": "Dönerfleisch im Box mit Pommes"
+          "description": "Dönerfleisch im Box mit Pommes",
+          "note": "TODO"
         },
         {
           "id": "12",
           "title": "Döner Schale",
           "prices": ["7,50", "10,00"],
-          "description": "Dönerfleisch ohne alles"
+          "description": "Dönerfleisch ohne alles",
+          "note": "TODO"
         },
         {
           "id": "13",
           "title": "Taxi Teller",
           "prices": ["11,00"],
-          "description": "Dönerfleisch mit Bratwurst, Salat und Beilage"
+          "description": "Dönerfleisch mit Bratwurst, Salat und Beilage",
+          "note": "TODO"
         },
         {
           "id": "14",
           "title": "Sucuk Teller",
           "prices": ["10,00"],
-          "description": "türk. Knoblauchwurst mit Salat und Beilage"
+          "description": "türk. Knoblauchwurst mit Salat und Beilage",
+          "note": "TODO"
         },
         {
           "id": "15",
           "title": "Döner Überbacken",
           "prices": ["11,00"],
-          "description": "Dönerfleisch überbacken mit Goudakäse"
+          "description": "Dönerfleisch überbacken mit Goudakäse",
+          "note": "TODO"
         },
         {
           "id": "16",
           "title": "Döner Hollandaise",
           "prices": ["12,00"],
-          "description": "Dönerfleisch überbacken mit Gouda & Sauce Hollandaise"
+          "description": "Dönerfleisch überbacken mit Gouda & Sauce Hollandaise",
+          "note": "TODO"
         }
       ]
     },
@@ -130,32 +143,37 @@
           "id": "21",
           "title": "Currywurst",
           "prices": ["5,00"],
-          "description": "mit Pommes"
+          "description": "mit Pommes",
+          "note": "TODO"
         },
         {
           "id": "22",
           "title": "Nuggets",
           "prices": ["5,00"],
-          "description": "6 Stück mit Saucen"
+          "description": "6 Stück mit Saucen",
+          "note": "TODO"
         },
         {
           "id": "23",
           "title": "Nuggets Box",
           "prices": ["7,00"],
-          "description": "6 Stück mit Pommes und Saucen"
+          "description": "6 Stück mit Pommes und Saucen",
+          "note": "TODO"
         },
         {
           "id": "24",
           "title": "Sigara Böregi",
           "prices": ["5,00"],
-          "description": "mit Käsefüllung 5 Stück"
+          "description": "mit Käsefüllung 5 Stück",
+          "note": "TODO"
         },
         {
           "id": "25",
           "title": "Ketchup, Mayo, Currysauce",
-          "prices": ["0,50"]
+          "prices": ["0,50"],
+          "note": "TODO"
         },
-        { "id": "26", "title": "Jägersauce, Balkansauce", "prices": ["1,00"] }
+        { "id": "26", "title": "Jägersauce, Balkansauce", "prices": ["1,00"], "note":"TODO" }
       ]
     },
     "Schnitzel": {
